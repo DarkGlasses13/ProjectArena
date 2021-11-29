@@ -14,7 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BouncerPrefab: {fileID: 8512232042280173598, guid: a793f9d4c5667894dbfc6497d2090821,
     type: 3}
-  MonsterPrefab: {fileID: 8760605746569069616, guid: 4597218bec671f64e897b6b209342ce5,
-    type: 3}
   BouncerMoveSpeed: 10
-  MonsterMoveSpeed: 5
+  SelectableLayerMask: 3

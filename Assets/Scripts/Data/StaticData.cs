@@ -6,4 +6,5 @@ public class StaticData : ScriptableObject
 {
     public GameObject BouncerPrefab;
     public float BouncerMoveSpeed;
+    public int Clickabel;
 }

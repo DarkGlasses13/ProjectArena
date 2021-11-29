@@ -26,8 +26,10 @@ namespace HellBounce
 
             _systems
                 .Add(new InputSystem())
+                .Add(new ButtonInitSystem())
+                .Add(new ButtonHandleSystem())
                 .Add(new BouncerInitSystem())
-                .Add(new MoveControlSystem())
+                .Add(new MoveSystem())
                 .Inject(StaticData)
                 .Inject(SceneData)
                 .Inject(runtimeData)

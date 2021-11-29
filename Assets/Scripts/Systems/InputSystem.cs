@@ -10,8 +10,9 @@ public class InputSystem : IEcsRunSystem
     {
         if (Input.GetMouseButtonDown(0))
         {
-            EmitRay(out _inputData.TouchInfo);
             _inputData.IsTouching = true;
+            EmitRay(out _inputData.TouchInfo);
+            CallClickhandler(ClickhandlerCallType.Click);
         }
 
         if (Input.GetMouseButton(0))
@@ -22,11 +23,41 @@ public class InputSystem : IEcsRunSystem
         if (Input.GetMouseButtonUp(0))
         {
             _inputData.IsTouching = false;
+            EmitRay(out _inputData.TouchInfo);
+            CallClickhandler(ClickhandlerCallType.Unclick);
         }
     }
 
     private void EmitRay(out RaycastHit touchInfo)
     {
         Physics.Raycast(_sceneData.Camera.ScreenPointToRay(Input.mousePosition), out touchInfo);
+    }
+
+    private void CallClickhandler(ClickhandlerCallType callType)
+    {
+        switch (callType)
+        {
+            case ClickhandlerCallType.Click:
+                Collider touchingObject = _inputData.TouchInfo.collider;
+
+                if (touchingObject && touchingObject.TryGetComponent<ClickHandler>(out _inputData.CalledClickHandler))
+                {
+                    _inputData.CalledClickHandler.Click();
+                }
+                break;
+
+            case ClickhandlerCallType.Unclick:
+                if (_inputData.CalledClickHandler != null)
+                {
+                    _inputData.CalledClickHandler.Unclick();
+                }
+                break;
+        }
+    }
+
+    private enum ClickhandlerCallType
+    {
+        Click,
+        Unclick
     }
 }
