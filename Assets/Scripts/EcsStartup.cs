@@ -5,7 +5,7 @@ namespace HellBounce
 {
     sealed class EcsStartup : MonoBehaviour 
     {
-        public StaticData StaticData;
+        public Configuration StaticData;
         public SceneData SceneData;
 
         private EcsWorld _world;
@@ -28,8 +28,10 @@ namespace HellBounce
                 .Add(new InputSystem())
                 .Add(new ButtonInitSystem())
                 .Add(new ButtonHandleSystem())
-                .Add(new BouncerInitSystem())
+                .Add(new PlayerInitSystem())
+                .Add(new ProjectileInitSystem())
                 .Add(new MoveSystem())
+                .Add(new ProjectileThrowSystem())
                 .Inject(StaticData)
                 .Inject(SceneData)
                 .Inject(runtimeData)

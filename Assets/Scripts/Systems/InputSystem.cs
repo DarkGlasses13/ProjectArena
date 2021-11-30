@@ -54,10 +54,4 @@ public class InputSystem : IEcsRunSystem
                 break;
         }
     }
-
-    private enum ClickhandlerCallType
-    {
-        Click,
-        Unclick
-    }
 }

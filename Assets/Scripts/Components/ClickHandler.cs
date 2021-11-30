@@ -17,3 +17,9 @@ public class ClickHandler : MonoBehaviour
         Entity.Del<Clicked>();
     }
 }
+
+public enum ClickhandlerCallType
+{
+    Click,
+    Unclick
+}

@@ -2,6 +2,6 @@ using UnityEngine;
 
 public struct Mover
 {
-    public Transform MovableObject;
+    public Transform Vew;
     public float MoveSpeed;
 }

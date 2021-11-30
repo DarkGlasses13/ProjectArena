@@ -9,7 +9,7 @@ public class SceneData : MonoBehaviour
     public GameObject LeftMoveButton;
     public GameObject RightMoveButton;
 
-    [HideInInspector] public Transform Bouncer;
+    [HideInInspector] public Transform Player;
 
     public Vector3 MovableCenter
     {

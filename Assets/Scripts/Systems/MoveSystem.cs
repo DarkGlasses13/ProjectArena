@@ -26,7 +26,7 @@ class MoveSystem : IEcsRunSystem
         foreach (int moverIndex in _moverFilter)
         {
             ref Mover mover = ref _moverFilter.Get1(moverIndex);
-            mover.MovableObject.transform.position = Vector3.MoveTowards(mover.MovableObject.transform.position, target, mover.MoveSpeed * Time.deltaTime);
+            mover.Vew.transform.position = Vector3.MoveTowards(mover.Vew.transform.position, target, mover.MoveSpeed * Time.deltaTime);
         }
     }
 
