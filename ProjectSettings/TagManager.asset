@@ -8,14 +8,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Clickable
+  - 
   - Water
   - UI
-  - Wall
-  - Projectile
-  - Bouncer
   - Field
-  - 
+  - Wall
+  - Bouncer
+  - Projectile
+  - Monster
   - 
   - 
   - 
@@ -40,4 +40,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Field
+    uniqueID: 2224234355
+    locked: 0
+  - name: Wall
+    uniqueID: 2784524965
+    locked: 0
+  - name: Bouncer
+    uniqueID: 555411393
+    locked: 0
+  - name: Projectile
+    uniqueID: 1683449877
+    locked: 0
+  - name: Monster
+    uniqueID: 3189426715
     locked: 0

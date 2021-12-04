@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class Configuration : ScriptableObject
 {
+    public PlatformType Platform;
     public GameObject PlayerPrefab;
-    [Range(0, 50)] public float PlayerMoveSpeed;
-    [Range(0, 50)] public float StartThrowForce;
+    public GameObject DefaultMonsterPrefab;
+    [Range(0, 100)] public float BouncerMoveSpeed;
+    [Range(0, 100)] public float StartBouncerThrowForce;
     public GameObject ProjectilePrefab;
+    public int FieldLayer;
+    public int WallLayer;
     public int BouncerLayer;
     public int ProjectileLayer;
-    public int ClickableLayer;
+    public int MonsterLayer;
+}
+
+public enum PlatformType
+{
+    Mobile,
+    PC
 }

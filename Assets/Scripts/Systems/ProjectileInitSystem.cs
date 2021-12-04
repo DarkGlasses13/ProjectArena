@@ -4,13 +4,16 @@ using UnityEngine;
 public class ProjectileInitSystem : IEcsInitSystem
 {
     private EcsWorld _world;
-    private Configuration _staticData;
+    private Configuration _configuration;
     private SceneData _sceneData;
+    private Vector3 _shotDirection = new Vector3(0, 0, -10);
 
     public void Init()
     {
-        EcsEntity projectileEntity = _world.NewEntity();
-        GameObject projectile = GameObject.Instantiate(_staticData.ProjectilePrefab, _sceneData.Player.position, Quaternion.identity, _sceneData.Arena);
-        Projectile projectileComponent = EntityComponentAdder.AddProjectile(projectileEntity, projectile, _staticData.ProjectileLayer);
+        EcsEntity projectile = _world.NewEntity();
+        GameObject vew = GameObject.Instantiate(_configuration.ProjectilePrefab, _sceneData.ProjectileSpawner.position, Quaternion.identity, _sceneData.Arena);
+        EntityComponentAdder.AddProjectile(projectile, vew, _configuration.ProjectileLayer);
+        projectile.Get<Projectile>().Rigidbody.velocity += _shotDirection;
+
     }
 }

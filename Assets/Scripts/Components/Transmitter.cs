@@ -1,7 +1,7 @@
 using Leopotam.Ecs;
 using UnityEngine;
 
-public class CatchHandler : MonoBehaviour
+public abstract class Transmitter : MonoBehaviour
 {
     public EcsEntity Entity;
 }

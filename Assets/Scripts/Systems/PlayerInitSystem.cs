@@ -4,15 +4,16 @@ using Leopotam.Ecs;
 public class PlayerInitSystem : IEcsInitSystem
 {
     private EcsWorld _world;
-    private Configuration _staticData;
+    private Configuration _configuration;
     private SceneData _sceneData;
 
     public void Init()
     {
         EcsEntity playerEntity = _world.NewEntity();
-        _sceneData.Player = GameObject.Instantiate(_staticData.PlayerPrefab, _sceneData.MovableCenter, Quaternion.identity, _sceneData.Arena).transform;
+        GameObject playerVew = GameObject.Instantiate(_configuration.PlayerPrefab, _sceneData.MovableCenter, Quaternion.identity, _sceneData.Arena);
+        _sceneData.Player = playerVew;
         EntityComponentAdder.AddPlayer(playerEntity);
-        EntityComponentAdder.AddMover(playerEntity, _sceneData.Player, _staticData.PlayerMoveSpeed);
-        EntityComponentAdder.AddBouncer(playerEntity, _staticData.StartThrowForce, _sceneData.Player.GetComponent<Collider>(), _staticData.BouncerLayer);
+        EntityComponentAdder.AddMover(playerEntity, _sceneData.Player, _configuration.BouncerMoveSpeed);
+        EntityComponentAdder.AddBouncer(playerEntity, playerVew, _configuration.StartBouncerThrowForce, _configuration.BouncerLayer);
     }
 }

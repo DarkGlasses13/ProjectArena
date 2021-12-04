@@ -3,13 +3,13 @@ using UnityEngine;
 public class SceneData : MonoBehaviour
 {
     public Camera Camera;
+    public GameObject MovePanel;
     public Transform Arena;
     public Transform LeftMovableEdge;
     public Transform RightMovableEdge;
-    public GameObject LeftMoveButton;
-    public GameObject RightMoveButton;
+    public Transform ProjectileSpawner;
 
-    [HideInInspector] public Transform Player;
+    [HideInInspector] public GameObject Player;
 
     public Vector3 MovableCenter
     {
