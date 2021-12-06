@@ -13,13 +13,6 @@ public class CatchingSystem : IEcsRunSystem
             ref Projectile projectileComponent = ref _caughtProjectileFilter.Get1(index);
             ref Caught caught = ref _caughtProjectileFilter.Get2(index);
             ref Bouncer bouncerComponent = ref caught.Catcher.Get<Bouncer>();
-
-            projectileComponent.Vew.transform.position = new Vector3
-            (
-                bouncerComponent.Vew.transform.position.x,
-                bouncerComponent.Vew.transform.position.y,
-                bouncerComponent.Vew.transform.position.z + 1
-            );
         }
 
         foreach (int index in _catchTriggerFilter)
@@ -28,7 +21,10 @@ public class CatchingSystem : IEcsRunSystem
             ref Projectile projectileComponent = ref projectile.Get<Projectile>();
             ref Caught caught = ref projectile.Get<Caught>();
             ref Bouncer bouncerComponent = ref caught.Catcher.Get<Bouncer>();
+            Vector3 catchPosition = new Vector3(0, 0, 1);
 
+            projectileComponent.Vew.transform.SetParent(bouncerComponent.Vew.transform);
+            projectileComponent.Vew.transform.localPosition = catchPosition;
             projectileComponent.Vew.SetActive(false);
             projectileComponent.Rigidbody.velocity = Vector3.zero;
             caught.Catcher.Del<Mover>();

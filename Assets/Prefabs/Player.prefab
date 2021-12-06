@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 523284178020293644}
   - component: {fileID: 7715475400734819561}
   - component: {fileID: 4174236970456149605}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6812729211243304734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4694805204570757941}
   - component: {fileID: 457621888823601527}
   - component: {fileID: 1727575204339037255}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 2452206962335033940}
   - component: {fileID: 3942816490499533110}
   - component: {fileID: 6283958846813073790}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 8836499080844653583}
   - component: {fileID: 5480237043408207050}
   - component: {fileID: 5149864756991378843}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 510991328868472165}
   - component: {fileID: 8512232042280173584}
   - component: {fileID: 3686370333009928697}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -447,7 +447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6745305562448554655}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vew
   m_TagString: Untagged
   m_Icon: {fileID: 0}

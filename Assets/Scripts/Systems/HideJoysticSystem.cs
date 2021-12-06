@@ -8,7 +8,7 @@ public class HideJoysticSystem : IEcsRunSystem
 
     public void Run()
     {
-        if (_moverFilter.IsEmpty() && Input.GetMouseButtonUp(0))
+        if (_moverFilter.IsEmpty() && Input.GetMouseButton(0) == false)
         {
             _sceneData.MovePanel.SetActive(false);
         }

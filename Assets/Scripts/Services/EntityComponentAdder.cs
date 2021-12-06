@@ -12,19 +12,20 @@ public static class EntityComponentAdder
         return playerComponent;
     }
 
-    public static Mover AddMover(EcsEntity entity, GameObject vew, float moveSpeed)
+    public static Mover AddMover(EcsEntity entity, GameObject vew, float moveSpeed, float rotationSmooth)
     {
         ref Mover mover = ref entity.Get<Mover>();
         mover.Vew = vew;
         mover.MoveSpeed = moveSpeed / _moveSpeedPercentModifire;
+        mover.rotationSmooth = rotationSmooth;
         return mover;
     }
 
     public static Bouncer AddBouncer(EcsEntity entity, GameObject vew, float throwForce, int bouncerLayer)
     {
         ref Bouncer bouncerComponent = ref entity.Get<Bouncer>();
-        bouncerComponent.ThrowForce = throwForce / _throwForcePercentModifire;
         bouncerComponent.Vew = vew;
+        bouncerComponent.ThrowForce = throwForce / _throwForcePercentModifire;
         CatchTransmitter catchHandler = bouncerComponent.Vew.AddComponent<CatchTransmitter>();
         catchHandler.Entity = entity;
         bouncerComponent.Vew.layer = bouncerLayer;
@@ -40,5 +41,21 @@ public static class EntityComponentAdder
         shotTransmitter.Entity = entity;
         projectileComponent.Vew.layer = projectileLayer;
         return projectileComponent;
+    }
+
+    public static Monster AddMonster(EcsEntity entity, GameObject vew)
+    {
+        ref Monster monsterComponent = ref entity.Get<Monster>();
+        monsterComponent.Vew = vew;
+        monsterComponent.Vew.AddComponent<KnockOutTransmitter>().Entity = entity;
+        return monsterComponent;
+    }
+
+    public static Generator AddGenerator(EcsEntity entity, GameObject vew, int generatorLayer)
+    {
+        ref Generator generatorComponent = ref entity.Get<Generator>();
+        generatorComponent.Vew = vew;
+        generatorComponent.Vew.layer = generatorLayer;
+        return generatorComponent;
     }
 }

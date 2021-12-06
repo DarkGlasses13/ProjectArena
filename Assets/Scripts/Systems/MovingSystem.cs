@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Leopotam.Ecs;
 
-class MoveingSystem : IEcsRunSystem
+class MovingSystem : IEcsRunSystem
 {
     private SceneData _sceneData;
     private InputData _inputData;
@@ -15,16 +15,16 @@ class MoveingSystem : IEcsRunSystem
                 return;
 
             case JoysticSide.Left:
-                Move(_sceneData.LeftMovableEdge.position);
+                Move(_sceneData.LeftMovableEdge);
                 break;
 
             case JoysticSide.Right:
-                Move(_sceneData.RightMovableEdge.position);
+                Move(_sceneData.RightMovableEdge);
                 break;
         }
     }
 
-    private void Move(Vector3 target)
+    private void Move(Transform target)
     {
         foreach (int moverIndex in _moverFilter)
         {
@@ -33,7 +33,7 @@ class MoveingSystem : IEcsRunSystem
             mover.Vew.transform.position = Vector3.MoveTowards
             (
                 mover.Vew.transform.position,
-                target,
+                target.position,
                 (mover.MoveSpeed * _inputData.JoysticDeflection) * Time.deltaTime
             );
         }

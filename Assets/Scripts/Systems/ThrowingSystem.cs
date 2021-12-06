@@ -15,12 +15,13 @@ public class ThrowingSystem : IEcsRunSystem
             ref EcsEntity bouncer = ref _threwBouncerFilter.GetEntity(index);
             ref Bouncer bouncerComponent = ref _threwBouncerFilter.Get1(index);
             ref ThrowReady throwReadyComponent = ref _threwBouncerFilter.Get2(index);
-            ref Projectile projectile = ref throwReadyComponent.ThrowableProjectile.Get<Projectile>();
-            projectile.Rigidbody.velocity += (throwReadyComponent.ThrowDirection * bouncerComponent.ThrowForce);
-            projectile.Vew.SetActive(true);
+            ref Projectile projectileComponent = ref throwReadyComponent.ThrowableProjectile.Get<Projectile>();
+            projectileComponent.Vew.transform.SetParent(_sceneData.Arena);
+            projectileComponent.Rigidbody.velocity += (throwReadyComponent.ThrowDirection * bouncerComponent.ThrowForce);
+            projectileComponent.Vew.SetActive(true);
             throwReadyComponent.ThrowableProjectile.Del<Caught>();
             bouncer.Del<ThrowReady>();
-            EntityComponentAdder.AddMover(bouncer, bouncerComponent.Vew, _configuration.BouncerMoveSpeed);
+            EntityComponentAdder.AddMover(bouncer, bouncerComponent.Vew, _configuration.BouncerMoveSpeed, _configuration.RotationSmooth);
         }
     }
 }

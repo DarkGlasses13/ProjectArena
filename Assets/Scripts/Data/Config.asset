@@ -13,16 +13,22 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   Platform: 1
+  StartMonsterPoolSize: 5
+  MonsterSpawnMultiplier: 0
+  BouncerMoveSpeed: 40
+  RotationSmooth: 4
+  StartBouncerThrowForce: 40
   PlayerPrefab: {fileID: 8512232042280173598, guid: a793f9d4c5667894dbfc6497d2090821,
     type: 3}
-  DefaultMonsterPrefab: {fileID: 8760605746569069616, guid: 4597218bec671f64e897b6b209342ce5,
-    type: 3}
-  BouncerMoveSpeed: 30
-  StartBouncerThrowForce: 40
   ProjectilePrefab: {fileID: 3117677487488550278, guid: 720c4b61093af094380354084eb2eeb8,
+    type: 3}
+  GeneratorPrefab: {fileID: 7928819701120157715, guid: af312896cc844104b9845b035579d9cd,
+    type: 3}
+  DefaultMonsterPrefab: {fileID: 8760605746569069616, guid: 4597218bec671f64e897b6b209342ce5,
     type: 3}
   FieldLayer: 6
   WallLayer: 7
   BouncerLayer: 8
   ProjectileLayer: 9
   MonsterLayer: 10
+  GeneratorLayer: 11

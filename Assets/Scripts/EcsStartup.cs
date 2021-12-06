@@ -30,13 +30,16 @@ namespace HellBounce
 #endif
 
             _updateSystems
+                .Add(new GeneratorInitSystem())
+                .Add(new PlayerInitSystem())
+                .Add(new ProjectileInitSystem())
+                .Add(new MonsterInitSystem())
                 .Add(new JoysticInputSystem(), SystemsNames.Joystick)
                 .Add(new CatchingSystem(), SystemsNames.Catch)
                 .Add(new AimingSystem(), SystemsNames.Aim)
                 .Add(new ThrowingSystem(), SystemsNames.Throw)
+                .Add(new MonsterFactorySystem())
                 .Add(new HideJoysticSystem())
-                .Add(new PlayerInitSystem())
-                .Add(new ProjectileInitSystem())
                 .OneFrame<CatchTrigger>()
                 .OneFrame<ThrowTrigger>()
                 .Inject(_updateSystems)
@@ -48,7 +51,8 @@ namespace HellBounce
                 .Init();
 
             _fixedUpdateSystems
-                .Add(new MoveingSystem(), SystemsNames.Move)
+                .Add(new MovingSystem(), SystemsNames.Move)
+                .Add(new BouncerLookSystem(), SystemsNames.Look)
                 .Inject(_fixedUpdateSystems)
                 .Inject(_configuration)
                 .Inject(_sceneData)

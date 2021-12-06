@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class AimingSystem : IEcsRunSystem
 {
+    private Configuration _configuration;
     private SceneData _sceneData;
     private InputData _inputData;
     private EcsFilter<Bouncer, ThrowReady> _throwReadyBouncerFilter;
@@ -55,7 +56,8 @@ public class AimingSystem : IEcsRunSystem
         foreach (int index in _throwReadyBouncerFilter)
         {
             ref EcsEntity bouncer = ref _throwReadyBouncerFilter.GetEntity(index);
-            Vector3 direction = (target - bouncer.Get<Bouncer>().Vew.transform.position).normalized;
+            ref Bouncer bouncerComponent = ref bouncer.Get<Bouncer>();
+            Vector3 direction = (target - bouncerComponent.Vew.transform.position).normalized;
             bouncer.Get<ThrowReady>().ThrowDirection = direction;
             bouncer.Get<ThrowTrigger>();
         }

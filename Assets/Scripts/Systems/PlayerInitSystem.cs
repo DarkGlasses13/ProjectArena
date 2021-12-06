@@ -13,7 +13,7 @@ public class PlayerInitSystem : IEcsInitSystem
         GameObject playerVew = GameObject.Instantiate(_configuration.PlayerPrefab, _sceneData.MovableCenter, Quaternion.identity, _sceneData.Arena);
         _sceneData.Player = playerVew;
         EntityComponentAdder.AddPlayer(playerEntity);
-        EntityComponentAdder.AddMover(playerEntity, _sceneData.Player, _configuration.BouncerMoveSpeed);
+        EntityComponentAdder.AddMover(playerEntity, _sceneData.Player, _configuration.BouncerMoveSpeed, _configuration.RotationSmooth);
         EntityComponentAdder.AddBouncer(playerEntity, playerVew, _configuration.StartBouncerThrowForce, _configuration.BouncerLayer);
     }
 }

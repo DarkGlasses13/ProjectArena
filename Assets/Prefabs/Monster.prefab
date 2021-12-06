@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 774015388737481541}
   - component: {fileID: 5244677578453533284}
   - component: {fileID: 4441483089551719844}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7330427206272303392}
   - component: {fileID: 3560043199656606789}
   - component: {fileID: 3377163345099287953}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3574267154750341941}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Vew
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8760605746569069616}
-  m_Material: {fileID: 13400000, guid: c512f0408ad8dbf49818344fa3abe7dd, type: 2}
+  m_Material: {fileID: 13400000, guid: 31962f2938b7d824283be26c21bcc50f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
