@@ -1,27 +1,22 @@
 using UnityEngine;
+using Leopotam.Ecs;
+using HellBounce;
 
 public class SceneData : MonoBehaviour
 {
+    public EcsStartup Startup;
+
     [Header("OBJECTS")]
     public Camera Camera;
-    public GameObject MovePanel;
+    public RectTransform MovePanel;
+    public DynamicJoystick Joystick;
     public Transform Arena;
-    public Transform[] Generators;
 
     [Header("[POINTS]")]
-    public Transform LeftMovableEdge;
-    public Transform RightMovableEdge;
-    public Transform ProjectileSpawner;
-    public Transform LeftMonsterGates;
-    public Transform RightMonsterGates;
+    public Transform PlayerSpawnPoint;
+    public Transform[] Gates;
+    public Transform ProjectileSpawnPoint;
+    public Transform MonsterPool;
 
-    [HideInInspector] public GameObject Player;
-
-    public Vector3 MovableCenter
-    {
-        get
-        {
-            return (LeftMovableEdge.position + RightMovableEdge.position) / 2;
-        }
-    }
+    [HideInInspector] public EcsEntity PlayerEntity;
 }

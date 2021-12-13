@@ -4,20 +4,29 @@ using UnityEngine;
 public class GeneratorInitSystem : IEcsInitSystem
 {
     private EcsWorld _world;
-    private Configuration _configuration;
+    private ConfigData _configData;
     private SceneData _sceneData;
     private int _generatorsCount = 5;
-    private Vector3 _spawnPosition = new Vector3(-4, 0, -9);
+    private float _distance = 2;
+    private Vector3 _startSpawnPosition = new Vector3(-4, 0, -8);
 
     public void Init()
     {
         for (int i = 0; i < _generatorsCount; i++)
         {
-            EcsEntity generator = _world.NewEntity();
-            GameObject vew = GameObject.Instantiate(_configuration.GeneratorPrefab, _sceneData.Arena);
-            EntityComponentAdder.AddGenerator(generator, vew, _configuration.GeneratorLayer);
-            vew.transform.localPosition = _spawnPosition;
-            _spawnPosition.x += 2;
+            GameObject vew = GameObject.Instantiate(_configData.GeneratorPrefab, _sceneData.Arena);
+            EcsEntity entity = _world.NewEntity();
+            ref Vew vewComponent = ref entity.Get<Vew>();
+            ref Generator generatorComponent = ref entity.Get<Generator>();
+
+            vewComponent.Object = vew;
+            vewComponent.Object.layer = _configData.GeneratorLayer;
+            vewComponent.Object.transform.localPosition = _startSpawnPosition;
+            Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();
+            transmitter.Type = TransmitterType.Generator;
+            transmitter.Entity = entity;
+            _startSpawnPosition.x += _distance;
+            generatorComponent.Helth = _configData.GeneratorHelth;
         }
     }
 }

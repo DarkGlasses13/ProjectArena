@@ -9,15 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8706a08f6eebf7a4ba278c031dc5b0de, type: 3}
+  m_Script: {fileID: 11500000, guid: 2054603795583834a80feb7bc70d38f2, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  Platform: 1
-  StartMonsterPoolSize: 5
+  RotationSmooth: 5
+  MovementType: 3
+  StartMonsterPoolSize: 20
   MonsterSpawnMultiplier: 0
-  BouncerMoveSpeed: 40
-  RotationSmooth: 4
-  StartBouncerThrowForce: 40
+  MaxTimeBetweenMonsterSpawn: 5
+  GeneratorHelth: 5
+  _startBouncerMoveSpeed: 70
+  _startBouncerThrowForce: 30
+  _defaultMonsterMoveSpeed: 40
   PlayerPrefab: {fileID: 8512232042280173598, guid: a793f9d4c5667894dbfc6497d2090821,
     type: 3}
   ProjectilePrefab: {fileID: 3117677487488550278, guid: 720c4b61093af094380354084eb2eeb8,

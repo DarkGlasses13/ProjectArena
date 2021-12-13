@@ -4,9 +4,14 @@ using UnityEngine;
 
 namespace HellBounce 
 {
-    sealed class EcsStartup : MonoBehaviour 
+    public sealed class EcsStartup : MonoBehaviour 
     {
-        [SerializeField] private Configuration _configuration;
+        // с ямюпъдю еярэ кхлхр пхйньернб он яремйюл оняке хявепоюмхъ кхлхрю, нм пюгпсьюеряъ х бшдю╗ряъ мнбши.
+        // мн опх ярнкймнбемхх я лнмярпюлх, кхлхр пхйньернб бнгпюярюер !!!
+        // йнцдю мсфмн бшдюрэ ямюпъд, бшдбхцюеряъ осьйю х бшярпекхбюер б ярнпнмс хцпнйю !!!
+        // опх смхврнфемхх цемепюрнпнб, нябеыемхе ярюмнбхряъ усфе !!!
+
+        [SerializeField] private ConfigData _configData;
         [SerializeField] private SceneData _sceneData;
         [SerializeField] private EcsUiEmitter _uiEmitter;
 
@@ -30,20 +35,26 @@ namespace HellBounce
 #endif
 
             _updateSystems
-                .Add(new GeneratorInitSystem())
                 .Add(new PlayerInitSystem())
                 .Add(new ProjectileInitSystem())
+                .Add(new GeneratorInitSystem())
                 .Add(new MonsterInitSystem())
-                .Add(new JoysticInputSystem(), SystemsNames.Joystick)
-                .Add(new CatchingSystem(), SystemsNames.Catch)
-                .Add(new AimingSystem(), SystemsNames.Aim)
-                .Add(new ThrowingSystem(), SystemsNames.Throw)
                 .Add(new MonsterFactorySystem())
-                .Add(new HideJoysticSystem())
+                .Add(new JoysticInputSystem(), SystemName.Joystick)
+                .Add(new ProjectileTrackingSystem(), SystemName.Track)
+                .Add(new CatchingSystem(), SystemName.Catch)
+                .Add(new AimingSystem(), SystemName.Aim)
+                .Add(new ThrowingSystem(), SystemName.Throw)
+                .Add(new HitSystem(), SystemName.Shot)
+                .Add(new TargetFindingSystem())
+                .Add(new AggroSystem(), SystemName.Aggro)
+                .Add(new MonsterDeathSystem(), SystemName.MonsterDeath)
+                .OneFrame<Awakened>()
+                .OneFrame<HitTrigger>()
                 .OneFrame<CatchTrigger>()
                 .OneFrame<ThrowTrigger>()
-                .Inject(_updateSystems)
-                .Inject(_configuration)
+                .OneFrame<Dead>()
+                .Inject(_configData)
                 .Inject(_sceneData)
                 .Inject(runtimeData)
                 .Inject(inputData)
@@ -51,14 +62,15 @@ namespace HellBounce
                 .Init();
 
             _fixedUpdateSystems
-                .Add(new MovingSystem(), SystemsNames.Move)
-                .Add(new BouncerLookSystem(), SystemsNames.Look)
-                .Inject(_fixedUpdateSystems)
-                .Inject(_configuration)
+                .Add(new RicochetSystem(), SystemName.Ricochet)
+                .Add(new MoveControlSystem(), SystemName.Move)
+                .Inject(_configData)
                 .Inject(_sceneData)
                 .Inject(runtimeData)
                 .Inject(inputData)
                 .Init();
+
+            _updateSystems.SetRunSystemState(_updateSystems.GetNamedRunSystem(SystemName.Aim), false);
         }
 
         private void Update() 
@@ -77,6 +89,21 @@ namespace HellBounce
             _updateSystems = null;
             _world?.Destroy();
             _world = null;
+        }
+
+        public void SetUpdateSystemState(string name, bool state)
+        {
+            SetSystemState(_updateSystems, name, state);
+        }
+
+        public void SetFixedUpdateSystemState(string name, bool state)
+        {
+            SetSystemState(_fixedUpdateSystems, name, state);
+        }
+
+        private void SetSystemState(EcsSystems systems, string name, bool state)
+        {
+            systems.SetRunSystemState(systems.GetNamedRunSystem(name), state);
         }
     }
 }

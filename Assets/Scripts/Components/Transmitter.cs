@@ -1,8 +1,16 @@
 using Leopotam.Ecs;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), (typeof(Collider)))]
-public abstract class Transmitter : MonoBehaviour
+public class Transmitter : MonoBehaviour
 {
+    public TransmitterType Type;
     public EcsEntity Entity;
+}
+
+public enum TransmitterType
+{
+    Bouncer,
+    Projectile,
+    Generator,
+    Monster
 }

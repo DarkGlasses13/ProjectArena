@@ -3,25 +3,31 @@ using UnityEngine;
 
 public class ThrowingSystem : IEcsRunSystem
 {
-    private Configuration _configuration;
     private SceneData _sceneData;
-    private InputData _inputData;
-    private EcsFilter<Bouncer, ThrowReady, ThrowTrigger> _threwBouncerFilter;
+    private EcsFilter<ThrowTrigger> _throwFilter;
 
     public void Run()
     {
-        foreach (int index in _threwBouncerFilter)
+        foreach (int index in _throwFilter)
         {
-            ref EcsEntity bouncer = ref _threwBouncerFilter.GetEntity(index);
-            ref Bouncer bouncerComponent = ref _threwBouncerFilter.Get1(index);
-            ref ThrowReady throwReadyComponent = ref _threwBouncerFilter.Get2(index);
-            ref Projectile projectileComponent = ref throwReadyComponent.ThrowableProjectile.Get<Projectile>();
-            projectileComponent.Vew.transform.SetParent(_sceneData.Arena);
-            projectileComponent.Rigidbody.velocity += (throwReadyComponent.ThrowDirection * bouncerComponent.ThrowForce);
-            projectileComponent.Vew.SetActive(true);
+            ref EcsEntity bouncer = ref _throwFilter.GetEntity(index);
+            ref Vew bouncerVewComponent = ref bouncer.Get<Vew>();
+            ref Bouncer bouncerComponent = ref bouncer.Get<Bouncer>();
+            ref ThrowReady throwReadyComponent = ref bouncer.Get<ThrowReady>();
+
+            ref EcsEntity projectile = ref throwReadyComponent.ThrowableProjectile;
+            ref Projectile projectileComponent = ref projectile.Get<Projectile>();
+            ref Vew projectileVewComponent = ref projectile.Get<Vew>();
+
+            projectileVewComponent.Object.transform.SetParent(_sceneData.Arena);
+            projectileVewComponent.Object.SetActive(true);
+
             throwReadyComponent.ThrowableProjectile.Del<Caught>();
             bouncer.Del<ThrowReady>();
-            EntityComponentAdder.AddMover(bouncer, bouncerComponent.Vew, _configuration.BouncerMoveSpeed, _configuration.RotationSmooth);
+            bouncer.Del<Aiming>();
+            _sceneData.Startup.SetUpdateSystemState(SystemName.Aim, false);
+            _sceneData.Startup.SetFixedUpdateSystemState(SystemName.Move, true);
+            _sceneData.Joystick.enabled = true;
         }
     }
 }

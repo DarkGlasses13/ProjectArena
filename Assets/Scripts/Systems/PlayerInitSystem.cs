@@ -4,16 +4,34 @@ using Leopotam.Ecs;
 public class PlayerInitSystem : IEcsInitSystem
 {
     private EcsWorld _world;
-    private Configuration _configuration;
+    private ConfigData _configData;
     private SceneData _sceneData;
+    
 
     public void Init()
     {
-        EcsEntity playerEntity = _world.NewEntity();
-        GameObject playerVew = GameObject.Instantiate(_configuration.PlayerPrefab, _sceneData.MovableCenter, Quaternion.identity, _sceneData.Arena);
-        _sceneData.Player = playerVew;
-        EntityComponentAdder.AddPlayer(playerEntity);
-        EntityComponentAdder.AddMover(playerEntity, _sceneData.Player, _configuration.BouncerMoveSpeed, _configuration.RotationSmooth);
-        EntityComponentAdder.AddBouncer(playerEntity, playerVew, _configuration.StartBouncerThrowForce, _configuration.BouncerLayer);
+        GameObject vewObject = Object.Instantiate
+        (
+            _configData.PlayerPrefab,
+            _sceneData.PlayerSpawnPoint.localPosition,
+            Quaternion.identity,
+            _sceneData.Arena
+        );
+
+        EcsEntity entity = _world.NewEntity();
+        entity.Get<Player>();
+        ref Vew vewComponent = ref entity.Get<Vew>();
+        ref Mover moverComponent = ref entity.Get<Mover>();
+        ref Bouncer bouncerComponent = ref entity.Get<Bouncer>();
+
+        vewComponent.Object = vewObject;
+        _sceneData.PlayerEntity = entity;
+        moverComponent.Controler = vewComponent.Object.GetComponent<CharacterController>();
+        moverComponent.MoveSpeed = _configData.BouncerMoveSpeed;
+        moverComponent.rotationSmooth = _configData.RotationSmooth;
+        bouncerComponent.ThrowForce = _configData.ThrowForce;
+        Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();
+        transmitter.Type = TransmitterType.Bouncer;
+        transmitter.Entity = entity;
     }
 }

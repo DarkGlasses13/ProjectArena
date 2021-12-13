@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.AI;
+using Leopotam.Ecs;
 
 public struct Monster
 {
-    public GameObject Vew;
-    public Transform Target;
+    public NavMeshAgent NavMeshAgent;
+    public EcsEntity Target;
+    public float MoveSpeed;
 }

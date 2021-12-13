@@ -1,31 +1,18 @@
-using Leopotam.Ecs;
 using UnityEngine;
+using UnityEngine.AI;
+using Leopotam.Ecs;
 
 public class MonsterInitSystem : IEcsInitSystem
 {
     private EcsWorld _world;
-    private Configuration _configuration;
+    private ConfigData _configData;
     private SceneData _sceneData;
 
-    private Vector3 _leftPoolPosition
-    {
-        get
-        {
-            return new Vector3(_sceneData.LeftMonsterGates.position.x - 2, _sceneData.LeftMonsterGates.position.y, _sceneData.LeftMonsterGates.position.z);
-        }
-    }
-    private Vector3 _rightPoolPosition
-    {
-        get
-        {
-            return new Vector3(_sceneData.RightMonsterGates.position.x + 2, _sceneData.RightMonsterGates.position.y, _sceneData.RightMonsterGates.position.z);
-        }
-    }
     private int _multiplier
     {
         get
         {
-            switch (_configuration.MonsterSpawnMultiplier)
+            switch (_configData.MonsterSpawnMultiplier)
             {
                 case SpawnMultiplier.X1:
                     return 1;
@@ -41,22 +28,24 @@ public class MonsterInitSystem : IEcsInitSystem
         }
     }
 
-
     public void Init()
     {
-        CreatePool(_leftPoolPosition);
-        CreatePool(_rightPoolPosition);
-    }
-
-    private void CreatePool(Vector3 poolPosition)
-    {
-        for (int m = 0; m < _configuration.StartMonsterPoolSize * _multiplier; m++)
+        for (int m = 0; m < _configData.StartMonsterPoolSize * _multiplier; m++)
         {
-            EcsEntity monster = _world.NewEntity();
-            GameObject vew = GameObject.Instantiate(_configuration.DefaultMonsterPrefab, _sceneData.Arena);
-            vew.transform.position = poolPosition;
-            Monster monsterComponent = EntityComponentAdder.AddMonster(monster, vew);
-            monster.Get<Sleeping>();
+            GameObject vew = Object.Instantiate(_configData.DefaultMonsterPrefab, _sceneData.Arena);
+            EcsEntity entity = _world.NewEntity();
+            ref Vew vewComponent = ref entity.Get<Vew>();
+            ref Monster monsterComponent = ref entity.Get<Monster>();
+            vewComponent.Object = vew;
+            vewComponent.Object.layer = _configData.MonsterLayer;
+            vewComponent.Object.SetActive(false);
+            vewComponent.Object.transform.localPosition = _sceneData.MonsterPool.localPosition;
+            monsterComponent.MoveSpeed = _configData.DefaultMonsterMoveSpeed;
+            monsterComponent.NavMeshAgent = vewComponent.Object.GetComponent<NavMeshAgent>();
+            Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();
+            transmitter.Type = TransmitterType.Monster;
+            transmitter.Entity = entity;
+            entity.Get<Sleeping>();
         }
     }
 }

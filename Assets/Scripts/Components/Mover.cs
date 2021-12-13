@@ -2,7 +2,7 @@ using UnityEngine;
 
 public struct Mover
 {
-    public GameObject Vew;
+    public CharacterController Controler;
     public float MoveSpeed;
     public float rotationSmooth;
 }

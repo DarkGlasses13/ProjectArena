@@ -2,27 +2,38 @@ using Leopotam.Ecs;
 using System.Collections;
 using UnityEngine;
 
-public class MonsterFactorySystem : IEcsRunSystem
+public class MonsterFactorySystem : IEcsInitSystem
 {
+    private ConfigData _configData;
     private SceneData _sceneData;
-    private EcsFilter<Monster, Sleeping> _sleepsMonsterFilter;
-    private EcsFilter<Monster, Awakened> _awakenedMonsterFilter;
-    private EcsFilter<Monster, Aggressive> _aggressiveMonsterFilter;
-    private EcsFilter<Monster, Dead> _deadMonsterFilter;
+    private EcsFilter<Monster, Vew, Sleeping> _sleepingMonsterFilter;
 
-    public void Run()
+    public void Init()
     {
-        
+        Coroutines.StartRoutine(WakeUp());
     }
 
-    //private IEnumerator WakeUpAndRelease()
-    //{
-    //    foreach (int index in _sleepsMonsterFilter)
-    //    {
-    //        EcsEntity monster = _sleepsMonsterFilter.GetEntity(Random.Range(0, _sleepsMonsterFilter.GetEntitiesCount()));
-    //        Monster monsterComponent = monster.Get<Monster>();
-    //        monster.Get<Awakened>();
-    //        monsterComponent.Vew.SetActive(true);
-    //    }
-    //}
+    private IEnumerator WakeUp()
+    {
+        switch (_sleepingMonsterFilter.IsEmpty())
+        {
+            case true:
+                Debug.Log("Monsters are disabled.");
+                break;
+
+            case false:
+
+                while (true)
+                {
+                    EcsEntity monster = _sleepingMonsterFilter.GetEntity(Random.Range(0, _sleepingMonsterFilter.GetEntitiesCount()));
+                    Vew vewComponent = monster.Get<Vew>();
+                    monster.Del<Sleeping>();
+                    vewComponent.Object.transform.localPosition = _sceneData.Gates[Random.Range(0, _sceneData.Gates.Length)].localPosition;
+                    vewComponent.Object.transform.localRotation = Quaternion.identity;
+                    vewComponent.Object.SetActive(true);
+                    monster.Get<Awakened>();
+                    yield return new WaitForSeconds(Random.Range(0, _configData.MaxTimeBetweenMonsterSpawn));
+                }
+        }
+    }
 }

@@ -1,8 +1,8 @@
 using UnityEngine;
+using Leopotam.Ecs;
 
 public struct Generator
 {
-    public GameObject Vew;
-
-    // При уничтожении генератора, освещение становится хуже !!!
+    public int Helth;
+    public EcsEntity Destroyer;
 }

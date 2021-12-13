@@ -3,32 +3,55 @@ using UnityEngine;
 
 public class AimingSystem : IEcsRunSystem
 {
-    private Configuration _configuration;
+    private ConfigData _configData;
     private SceneData _sceneData;
     private InputData _inputData;
-    private EcsFilter<Bouncer, ThrowReady> _throwReadyBouncerFilter;
+    private EcsFilter<ThrowReady>.Exclude<Aiming> _throwReadyFilter;
+    private EcsFilter<ThrowReady, Aiming> _aimingFilter;
 
     public void Run()
     {
-        if (_sceneData.MovePanel.activeSelf == false)
+        foreach (int index in _throwReadyFilter)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (_sceneData.Joystick.IsHiden)
             {
-                _inputData.IsAiming = true;
-                EmitRay(out _inputData.AimInfo);
+                _sceneData.Joystick.enabled = false;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    _throwReadyFilter.GetEntity(index).Get<Aiming>();
+                }
             }
+        }
+
+        foreach (int index in _aimingFilter)
+        {
+            ref EcsEntity bouncer = ref _aimingFilter.GetEntity(index);
+            ref Bouncer bouncerComponent = ref bouncer.Get<Bouncer>();
+            ref Vew vewComponent = ref bouncer.Get<Vew>();
+
+            Vector3 aimingPoint = new Vector3(_inputData.TouchInfo.point.x, 0, _inputData.TouchInfo.point.z);
+            Vector3 directionToAimingPoint = aimingPoint - vewComponent.Object.transform.position;
+            Quaternion aimingRotation = Quaternion.LookRotation(directionToAimingPoint);
 
             if (Input.GetMouseButton(0))
             {
-                EmitRay(out _inputData.AimInfo);
-                Aim();
+                EmitRay(out _inputData.TouchInfo);
+
+                vewComponent.Object.transform.rotation = Quaternion.Lerp
+                    (
+                        vewComponent.Object.transform.rotation,
+                        aimingRotation,
+                        _configData.RotationSmooth * Time.deltaTime
+                    );
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                _inputData.IsAiming = false;
-                EmitRay(out _inputData.AimInfo);
-                DeterminThrowDirection();
+                EmitRay(out _inputData.TouchInfo);
+                Vector3 direction = (aimingPoint - vewComponent.Object.transform.position).normalized;
+                bouncer.Get<ThrowReady>().ThrowDirection = direction;
+                bouncer.Get<ThrowTrigger>();
             }
         }
     }
@@ -36,30 +59,5 @@ public class AimingSystem : IEcsRunSystem
     private void EmitRay(out RaycastHit hitInfo)
     {
         Physics.Raycast(_sceneData.Camera.ScreenPointToRay(Input.mousePosition), out hitInfo);
-    }
-
-    private void Aim()
-    {
-        Vector3 target = new Vector3(_inputData.AimInfo.point.x, 0, _inputData.AimInfo.point.z);
-
-        foreach (int index in _throwReadyBouncerFilter)
-        {
-            ref Bouncer bouncerComponent = ref _throwReadyBouncerFilter.Get1(index);
-            bouncerComponent.Vew.transform.LookAt(target);
-        }
-    }
-
-    private void DeterminThrowDirection()
-    {
-        Vector3 target = new Vector3(_inputData.AimInfo.point.x, 0, _inputData.AimInfo.point.z);
-
-        foreach (int index in _throwReadyBouncerFilter)
-        {
-            ref EcsEntity bouncer = ref _throwReadyBouncerFilter.GetEntity(index);
-            ref Bouncer bouncerComponent = ref bouncer.Get<Bouncer>();
-            Vector3 direction = (target - bouncerComponent.Vew.transform.position).normalized;
-            bouncer.Get<ThrowReady>().ThrowDirection = direction;
-            bouncer.Get<ThrowTrigger>();
-        }
     }
 }
