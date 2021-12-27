@@ -30,13 +30,13 @@ public class AimingSystem : IEcsRunSystem
             ref Bouncer bouncerComponent = ref bouncer.Get<Bouncer>();
             ref Vew vewComponent = ref bouncer.Get<Vew>();
 
-            Vector3 aimingPoint = new Vector3(_inputData.TouchInfo.point.x, 0, _inputData.TouchInfo.point.z);
+            Vector3 aimingPoint = new Vector3(_inputData.ClickInfo.point.x, 0, _inputData.ClickInfo.point.z);
             Vector3 directionToAimingPoint = aimingPoint - vewComponent.Object.transform.position;
             Quaternion aimingRotation = Quaternion.LookRotation(directionToAimingPoint);
 
             if (Input.GetMouseButton(0))
             {
-                EmitRay(out _inputData.TouchInfo);
+                EmitRay(out _inputData.ClickInfo);
 
                 vewComponent.Object.transform.rotation = Quaternion.Lerp
                     (
@@ -48,7 +48,7 @@ public class AimingSystem : IEcsRunSystem
 
             if (Input.GetMouseButtonUp(0))
             {
-                EmitRay(out _inputData.TouchInfo);
+                EmitRay(out _inputData.ClickInfo);
                 Vector3 direction = (aimingPoint - vewComponent.Object.transform.position).normalized;
                 bouncer.Get<ThrowReady>().ThrowDirection = direction;
                 bouncer.Get<ThrowTrigger>();

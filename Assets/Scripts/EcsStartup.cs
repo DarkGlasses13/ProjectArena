@@ -6,11 +6,6 @@ namespace HellBounce
 {
     public sealed class EcsStartup : MonoBehaviour 
     {
-        // с ямюпъдю еярэ кхлхр пхйньернб он яремйюл оняке хявепоюмхъ кхлхрю, нм пюгпсьюеряъ х бшдю╗ряъ мнбши.
-        // мн опх ярнкймнбемхх я лнмярпюлх, кхлхр пхйньернб бнгпюярюер !!!
-        // йнцдю мсфмн бшдюрэ ямюпъд, бшдбхцюеряъ осьйю х бшярпекхбюер б ярнпнмс хцпнйю !!!
-        // опх смхврнфемхх цемепюрнпнб, нябеыемхе ярюмнбхряъ усфе !!!
-
         [SerializeField] private ConfigData _configData;
         [SerializeField] private SceneData _sceneData;
         [SerializeField] private EcsUiEmitter _uiEmitter;
@@ -38,9 +33,9 @@ namespace HellBounce
                 .Add(new PlayerInitSystem())
                 .Add(new ProjectileInitSystem())
                 .Add(new GeneratorInitSystem())
-                .Add(new MonsterInitSystem())
-                .Add(new MonsterFactorySystem())
-                .Add(new JoysticInputSystem(), SystemName.Joystick)
+                .Add(new RobotInitSystem())
+                .Add(new RobotFactorySystem())
+                .Add(new InputSystem(), SystemName.Joystick)
                 .Add(new ProjectileTrackingSystem(), SystemName.Track)
                 .Add(new CatchingSystem(), SystemName.Catch)
                 .Add(new AimingSystem(), SystemName.Aim)
@@ -48,7 +43,7 @@ namespace HellBounce
                 .Add(new HitSystem(), SystemName.Shot)
                 .Add(new TargetFindingSystem())
                 .Add(new AggroSystem(), SystemName.Aggro)
-                .Add(new MonsterDeathSystem(), SystemName.MonsterDeath)
+                .Add(new RobotDeathSystem(), SystemName.MonsterDeath)
                 .OneFrame<Awakened>()
                 .OneFrame<HitTrigger>()
                 .OneFrame<CatchTrigger>()

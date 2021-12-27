@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class ConfigData : ScriptableObject
 {
-    private const int _bouncerMoveSpeedPercentModifire = 10;
-    private const int _monsterMoveSpeedPercentModifire = 20;
-    private const int _throwForcePercentModifire = 3;
 
     [HideInInspector] public float RotationSmooth = 3;
 
@@ -14,30 +11,36 @@ public class ConfigData : ScriptableObject
     public MovementType MovementType;
 
     [Header("[BALANCE SETTINGS]")]
-    public int StartMonsterPoolSize;
-    public SpawnMultiplier MonsterSpawnMultiplier;
-    [Range(1, 10)] public int MaxTimeBetweenMonsterSpawn;
+    public int RobotPoolSize;
+    public SpawnMultiplier RobotSpawnMultiplier;
+    public float MaxTimeBetweenRobotSpawn = 10;
     [Range(1, 10)] public int GeneratorHelth;
     [SerializeField] [Range(0, 100)] private float _startBouncerMoveSpeed;
     [SerializeField] [Range(0, 100)] private float _startBouncerThrowForce;
-    [SerializeField] [Range(0, 100)] private float _defaultMonsterMoveSpeed;
+    [SerializeField] [Range(0, 100)] private float _defaultRobotMoveSpeed;
     public float BouncerMoveSpeed { get { return _startBouncerMoveSpeed / _bouncerMoveSpeedPercentModifire; } }
     public float ThrowForce { get { return _startBouncerThrowForce / _throwForcePercentModifire; } }
-    public float DefaultMonsterMoveSpeed { get { return _defaultMonsterMoveSpeed / _monsterMoveSpeedPercentModifire; } }
+    public float DefaultMonsterMoveSpeed { get { return _defaultRobotMoveSpeed / _robotMoveSpeedPercentModifire; } }
 
     [Header("[PREFABS]")]
     public GameObject PlayerPrefab;
     public GameObject ProjectilePrefab;
     public GameObject GeneratorPrefab;
-    public GameObject DefaultMonsterPrefab;
+    public GameObject DefaultRobotPrefab;
 
     [Header("[PHYSICAL LAYERS]")]
     public int FieldLayer;
     public int WallLayer;
     public int BouncerLayer;
     public int ProjectileLayer;
-    public int MonsterLayer;
+    public int RobotLayer;
     public int GeneratorLayer;
+
+
+
+    private const int _bouncerMoveSpeedPercentModifire = 10;
+    private const int _robotMoveSpeedPercentModifire = 20;
+    private const int _throwForcePercentModifire = 3;
 }
 
 public enum SpawnMultiplier

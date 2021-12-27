@@ -16,7 +16,7 @@ public class SceneData : MonoBehaviour
     public Transform PlayerSpawnPoint;
     public Transform[] Gates;
     public Transform ProjectileSpawnPoint;
-    public Transform MonsterPool;
+    public Transform RobotPool;
 
     [HideInInspector] public EcsEntity PlayerEntity;
 }

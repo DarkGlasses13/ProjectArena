@@ -13,7 +13,7 @@ class MoveControlSystem : IEcsRunSystem
             ref Mover moverComponent = ref _moverFilter.Get1(index);
             ref Vew vewComponent = ref _moverFilter.Get2(index);
 
-            Vector3 moveDirection = new Vector3(_inputData.JoysticDirection.x, 0, _inputData.JoysticDirection.y);
+            Vector3 moveDirection = new Vector3(_inputData.ControllerDirection.x, 0, _inputData.ControllerDirection.y);
             moverComponent.Controler.Move(moveDirection * moverComponent.MoveSpeed * Time.deltaTime);
         }
     }

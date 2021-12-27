@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   RotationSmooth: 5
-  MovementType: 3
-  StartMonsterPoolSize: 20
-  MonsterSpawnMultiplier: 0
-  MaxTimeBetweenMonsterSpawn: 5
+  MovementType: 4
+  RobotPoolSize: 100
+  RobotSpawnMultiplier: 0
+  MaxTimeBetweenRobotSpawn: 5
   GeneratorHelth: 5
   _startBouncerMoveSpeed: 70
   _startBouncerThrowForce: 30
-  _defaultMonsterMoveSpeed: 40
+  _defaultRobotMoveSpeed: 50
   PlayerPrefab: {fileID: 8512232042280173598, guid: a793f9d4c5667894dbfc6497d2090821,
     type: 3}
   ProjectilePrefab: {fileID: 3117677487488550278, guid: 720c4b61093af094380354084eb2eeb8,
     type: 3}
   GeneratorPrefab: {fileID: 7928819701120157715, guid: af312896cc844104b9845b035579d9cd,
     type: 3}
-  DefaultMonsterPrefab: {fileID: 8760605746569069616, guid: 4597218bec671f64e897b6b209342ce5,
+  DefaultRobotPrefab: {fileID: 8760605746569069616, guid: 4597218bec671f64e897b6b209342ce5,
     type: 3}
   FieldLayer: 6
   WallLayer: 7
   BouncerLayer: 8
   ProjectileLayer: 9
-  MonsterLayer: 10
+  RobotLayer: 10
   GeneratorLayer: 11

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HitSystem : IEcsRunSystem
 {
-    private EcsFilter<Monster, HitTrigger> _hitedMonsterFilter;
+    private EcsFilter<Robot, HitTrigger> _hitedMonsterFilter;
     private EcsFilter<Generator, HitTrigger> _hitedGeneratorFilter;
 
     public void Run()

@@ -7,7 +7,7 @@ public class CatchingSystem : IEcsRunSystem
     private EcsFilter<Bouncer, Vew>.Exclude<ThrowReady, Aiming> _bouncerFilter;
     private EcsFilter<CatchTrigger> _catchTriggerFilter;
     
-    private Vector3 _catchPosition = new Vector3(0, 0, 1);
+    private Vector3 _catchPosition = new Vector3(0, 0, 1f);
 
     public void Run()
     {
@@ -23,7 +23,7 @@ public class CatchingSystem : IEcsRunSystem
             if
             (
                 Physics.Raycast(ray, out RaycastHit catchInfo, rayLength) &&
-                catchInfo.collider.TryGetComponent<Transmitter>(out Transmitter transmitter) &&
+                catchInfo.collider.TryGetComponent(out Transmitter transmitter) &&
                 transmitter.Type == TransmitterType.Projectile
             ) 
             {

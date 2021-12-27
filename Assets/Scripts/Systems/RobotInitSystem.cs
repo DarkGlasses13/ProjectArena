@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Leopotam.Ecs;
 
-public class MonsterInitSystem : IEcsInitSystem
+public class RobotInitSystem : IEcsInitSystem
 {
     private EcsWorld _world;
     private ConfigData _configData;
@@ -12,7 +12,7 @@ public class MonsterInitSystem : IEcsInitSystem
     {
         get
         {
-            switch (_configData.MonsterSpawnMultiplier)
+            switch (_configData.RobotSpawnMultiplier)
             {
                 case SpawnMultiplier.X1:
                     return 1;
@@ -30,16 +30,16 @@ public class MonsterInitSystem : IEcsInitSystem
 
     public void Init()
     {
-        for (int m = 0; m < _configData.StartMonsterPoolSize * _multiplier; m++)
+        for (int m = 0; m < _configData.RobotPoolSize * _multiplier; m++)
         {
-            GameObject vew = Object.Instantiate(_configData.DefaultMonsterPrefab, _sceneData.Arena);
+            GameObject vew = Object.Instantiate(_configData.DefaultRobotPrefab, _sceneData.Arena);
             EcsEntity entity = _world.NewEntity();
             ref Vew vewComponent = ref entity.Get<Vew>();
-            ref Monster monsterComponent = ref entity.Get<Monster>();
+            ref Robot monsterComponent = ref entity.Get<Robot>();
             vewComponent.Object = vew;
-            vewComponent.Object.layer = _configData.MonsterLayer;
+            vewComponent.Object.layer = _configData.RobotLayer;
             vewComponent.Object.SetActive(false);
-            vewComponent.Object.transform.localPosition = _sceneData.MonsterPool.localPosition;
+            vewComponent.Object.transform.localPosition = _sceneData.RobotPool.localPosition;
             monsterComponent.MoveSpeed = _configData.DefaultMonsterMoveSpeed;
             monsterComponent.NavMeshAgent = vewComponent.Object.GetComponent<NavMeshAgent>();
             Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();

@@ -3,7 +3,7 @@
     "com.leopotam.ecs": "https://github.com/Leopotam/ecs.git",
     "com.leopotam.ecs-ui": "https://github.com/Leopotam/ecs-ui.git",
     "com.leopotam.ecs-unityintegration": "https://github.com/Leopotam/ecs-unityintegration.git",
-    "com.unity.collab-proxy": "1.9.0",
+    "com.unity.collab-proxy": "1.15.7",
     "com.unity.ide.visualstudio": "2.0.12",
     "com.unity.ide.vscode": "1.2.4",
     "com.unity.mobile.android-logcat": "1.2.3",

@@ -1,48 +1,42 @@
 using Leopotam.Ecs;
+using System;
 using UnityEngine;
 
 public class TargetFindingSystem : IEcsRunSystem
 {
     private SceneData _sceneData;
     private EcsFilter<Generator>.Exclude<Busy> _freeGeneratorFilter;
-    private EcsFilter<Monster, Awakened> _awakenedMonsterFilter;
+    private EcsFilter<Robot, Awakened> _awakenedRobotFilter;
 
     public void Run()
     {
-        foreach (int index in _awakenedMonsterFilter)
+        foreach (int index in _awakenedRobotFilter)
         {
-            ref EcsEntity monster = ref _awakenedMonsterFilter.GetEntity(index);
-            ref Monster monsterComponent = ref monster.Get<Monster>();
-            monsterComponent.Target = GetTarget(monster);
-            monster.Del<Awakened>();
-            monster.Get<Aggressive>();
+            ref EcsEntity robot = ref _awakenedRobotFilter.GetEntity(index);
+            ref Robot robotComponent = ref robot.Get<Robot>();
+            robotComponent.Target = GetTarget(robot, out float stoppingDistance);
+            robotComponent.NavMeshAgent.stoppingDistance = stoppingDistance;
+            robot.Del<Awakened>();
+            robot.Get<Aggressive>();
         }
     }
 
-    private EcsEntity GetTarget(EcsEntity destroyer)
+    private EcsEntity GetTarget(EcsEntity destroyer, out float stoppingDistance)
     {
-        switch (_freeGeneratorFilter.IsEmpty())
+        if (_freeGeneratorFilter.IsEmpty() == false)
         {
-            case true:
-
-                if (_sceneData.PlayerEntity != EcsEntity.Null)
-                {
-                    return _sceneData.PlayerEntity;
-                }
-                break;
-
-            case false:
-
-                foreach (int index in _freeGeneratorFilter)
-                {
-                    ref EcsEntity generator = ref _freeGeneratorFilter.GetEntity(index);
-                    generator.Get<Generator>().Destroyer = destroyer;
-                    generator.Get<Busy>();
-                    return generator;
-                }
-                break;
+            foreach (int index in _freeGeneratorFilter)
+            {
+                ref EcsEntity generator = ref _freeGeneratorFilter.GetEntity(index);
+                ref Generator generatorComponent = ref generator.Get<Generator>();
+                generatorComponent.Destroyer = destroyer;
+                stoppingDistance = 2f;
+                generator.Get<Busy>();
+                return generator;
+            }
         }
 
+        stoppingDistance = 2f;
         return _sceneData.PlayerEntity;
     }
 }

@@ -3,9 +3,9 @@ using Leopotam.Ecs;
 
 public class InputData
 {
-    public Vector2 JoysticDirection;
+    public Vector2 ControllerDirection;
 
-    public RaycastHit TouchInfo;
+    public RaycastHit ClickInfo;
 
     public Touch Touch
     {

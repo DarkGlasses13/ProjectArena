@@ -7,8 +7,8 @@ public class GeneratorInitSystem : IEcsInitSystem
     private ConfigData _configData;
     private SceneData _sceneData;
     private int _generatorsCount = 5;
-    private float _distance = 2;
-    private Vector3 _startSpawnPosition = new Vector3(-4, 0, -8);
+    private float _distance = 2f;
+    private Vector3 _startSpawnPosition = new Vector3(-4f, 0, -10.5f);
 
     public void Init()
     {

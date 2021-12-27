@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AggroSystem : IEcsRunSystem
 {
-    private EcsFilter<Monster, Aggressive>.Exclude<Breaking> _aggressiveMonsterFilter;
+    private EcsFilter<Robot, Aggressive>.Exclude<Breaking> _aggressiveMonsterFilter;
 
     public void Run()
     {
@@ -11,7 +11,7 @@ public class AggroSystem : IEcsRunSystem
         {
             ref EcsEntity monster = ref _aggressiveMonsterFilter.GetEntity(index);
             ref Vew vewComponent = ref monster.Get<Vew>();
-            ref Monster monsterComponent = ref monster.Get<Monster>();
+            ref Robot monsterComponent = ref monster.Get<Robot>();
 
             if (monsterComponent.Target != EcsEntity.Null)
             {

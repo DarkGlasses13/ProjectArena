@@ -25,7 +25,7 @@ public class RicochetSystem : IEcsRunSystem
                 float rotation = 90 - Mathf.Atan2(reflectDirection.z, reflectDirection.x) * Mathf.Rad2Deg;
                 vewComponent.Object.transform.eulerAngles = new Vector3(0, rotation, 0);
 
-                if (peojectileComponent.hitInfo.collider.TryGetComponent<Transmitter>(out Transmitter transmitter))
+                if (peojectileComponent.hitInfo.collider.TryGetComponent(out Transmitter transmitter))
                 {
                     transmitter.Entity.Get<HitTrigger>();
                 }
