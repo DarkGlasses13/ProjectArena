@@ -6,27 +6,24 @@ public class AimingSystem : IEcsRunSystem
     private ConfigData _configData;
     private SceneData _sceneData;
     private InputData _inputData;
-    private EcsFilter<ThrowReady>.Exclude<Aiming> _throwReadyFilter;
-    private EcsFilter<ThrowReady, Aiming> _aimingFilter;
+    private EcsFilter<Catcher>.Exclude<Aimer> _catcherFilter;
+    private EcsFilter<Aimer> _aimerFilter;
 
     public void Run()
     {
-        foreach (int index in _throwReadyFilter)
+        foreach (int index in _catcherFilter)
         {
-            if (_sceneData.Joystick.IsHiden)
+            if (Input.GetMouseButtonDown(0))
             {
-                _sceneData.Joystick.enabled = false;
-
-                if (Input.GetMouseButtonDown(0))
-                {
-                    _throwReadyFilter.GetEntity(index).Get<Aiming>();
-                }
+                ref EcsEntity bouncer = ref _catcherFilter.GetEntity(index);
+                bouncer.Get<Aimer>();
+                _sceneData.VirtualJoystic.Disable();
             }
         }
 
-        foreach (int index in _aimingFilter)
+        foreach (int index in _aimerFilter)
         {
-            ref EcsEntity bouncer = ref _aimingFilter.GetEntity(index);
+            ref EcsEntity bouncer = ref _aimerFilter.GetEntity(index);
             ref Bouncer bouncerComponent = ref bouncer.Get<Bouncer>();
             ref Vew vewComponent = ref bouncer.Get<Vew>();
 
@@ -50,7 +47,7 @@ public class AimingSystem : IEcsRunSystem
             {
                 EmitRay(out _inputData.ClickInfo);
                 Vector3 direction = (aimingPoint - vewComponent.Object.transform.position).normalized;
-                bouncer.Get<ThrowReady>().ThrowDirection = direction;
+                bouncer.Get<Aimer>().ThrowDirection = direction;
                 bouncer.Get<ThrowTrigger>();
             }
         }

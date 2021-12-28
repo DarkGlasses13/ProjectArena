@@ -39,4 +39,16 @@ public class DynamicJoystick : Joystick
         }
         base.HandleInput(magnitude, normalised, radius, cam);
     }
+
+    public void Enable()
+    {
+        backgroundImage.enabled = true;
+        handleImage.enabled = true;
+    }
+
+    public void Disable()
+    {
+        backgroundImage.enabled = false;
+        handleImage.enabled = false;
+    }
 }

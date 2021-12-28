@@ -9,22 +9,18 @@ public class InputSystem : IEcsRunSystem
 
     public void Run()
     {
+        GameObject virtualJoystic = _sceneData.VirtualJoystic.gameObject;
+
         switch (_configData.MovementType)
         {
-            case MovementType.Horizontal:
-                _inputData.ControllerDirection = _sceneData.Joystick.Direction;
+            case MovementType.VirtualJoystick:
+                _inputData.MotionInput = _sceneData.VirtualJoystic.Direction;
+                if (virtualJoystic.activeSelf == false) { virtualJoystic.gameObject.SetActive(true); }
                 break;
-            case MovementType.Vertical:
-                _inputData.ControllerDirection = _sceneData.Joystick.Direction;
-                break;
-            case MovementType.CombinedStatic:
-                _inputData.ControllerDirection = _sceneData.Joystick.Direction;
-                break;
-            case MovementType.CombinedFree:
-                _inputData.ControllerDirection = _sceneData.Joystick.Direction;
-                break;
-            case MovementType.MouseKeyboard:
-                _inputData.ControllerDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+            case MovementType.MouseAndKeyboard:
+                _inputData.MotionInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+                if (virtualJoystic.activeSelf) { virtualJoystic.gameObject.SetActive(false); }
                 break;
         }
     }
@@ -32,9 +28,6 @@ public class InputSystem : IEcsRunSystem
 
 public enum MovementType
 {
-    Horizontal,
-    Vertical,
-    CombinedStatic,
-    CombinedFree,
-    MouseKeyboard
+    VirtualJoystick,
+    MouseAndKeyboard
 }

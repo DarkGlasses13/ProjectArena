@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ThrowingSystem : IEcsRunSystem
 {
+    private ConfigData _configData;
     private SceneData _sceneData;
     private EcsFilter<ThrowTrigger> _throwFilter;
 
@@ -11,23 +12,23 @@ public class ThrowingSystem : IEcsRunSystem
         foreach (int index in _throwFilter)
         {
             ref EcsEntity bouncer = ref _throwFilter.GetEntity(index);
-            ref Vew bouncerVewComponent = ref bouncer.Get<Vew>();
-            ref Bouncer bouncerComponent = ref bouncer.Get<Bouncer>();
-            ref ThrowReady throwReadyComponent = ref bouncer.Get<ThrowReady>();
+            ref Catcher catcherComponent = ref bouncer.Get<Catcher>();
+            ref Mover bouncerMoverComponent = ref bouncer.Get<Mover>();
 
-            ref EcsEntity projectile = ref throwReadyComponent.ThrowableProjectile;
+            ref EcsEntity projectile = ref catcherComponent.ThrowableProjectile;
             ref Projectile projectileComponent = ref projectile.Get<Projectile>();
             ref Vew projectileVewComponent = ref projectile.Get<Vew>();
 
             projectileVewComponent.Object.transform.SetParent(_sceneData.Arena);
             projectileVewComponent.Object.SetActive(true);
 
-            throwReadyComponent.ThrowableProjectile.Del<Caught>();
-            bouncer.Del<ThrowReady>();
-            bouncer.Del<Aiming>();
-            _sceneData.Startup.SetUpdateSystemState(SystemName.Aim, false);
-            _sceneData.Startup.SetFixedUpdateSystemState(SystemName.Move, true);
-            _sceneData.Joystick.enabled = true;
+            bouncerMoverComponent.Controler = bouncer.Get<Vew>().Object.GetComponent<CharacterController>();
+            bouncerMoverComponent.MoveSpeed = _configData.BouncerMoveSpeed;
+            bouncerMoverComponent.rotationSmooth = _configData.RotationSmooth;
+            catcherComponent.ThrowableProjectile.Del<Caught>();
+            bouncer.Del<Aimer>();
+            bouncer.Del<Catcher>();
+            _sceneData.VirtualJoystic.Enable();
         }
     }
 }

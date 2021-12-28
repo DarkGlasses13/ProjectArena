@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Config
   m_EditorClassIdentifier: 
   RotationSmooth: 5
-  MovementType: 4
+  MovementType: 1
   RobotPoolSize: 100
   RobotSpawnMultiplier: 0
   MaxTimeBetweenRobotSpawn: 5

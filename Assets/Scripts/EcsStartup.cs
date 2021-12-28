@@ -35,7 +35,7 @@ namespace HellBounce
                 .Add(new GeneratorInitSystem())
                 .Add(new RobotInitSystem())
                 .Add(new RobotFactorySystem())
-                .Add(new InputSystem(), SystemName.Joystick)
+                .Add(new InputSystem(), SystemName.Input)
                 .Add(new ProjectileTrackingSystem(), SystemName.Track)
                 .Add(new CatchingSystem(), SystemName.Catch)
                 .Add(new AimingSystem(), SystemName.Aim)
@@ -46,7 +46,6 @@ namespace HellBounce
                 .Add(new RobotDeathSystem(), SystemName.MonsterDeath)
                 .OneFrame<Awakened>()
                 .OneFrame<HitTrigger>()
-                .OneFrame<CatchTrigger>()
                 .OneFrame<ThrowTrigger>()
                 .OneFrame<Dead>()
                 .Inject(_configData)
@@ -64,8 +63,6 @@ namespace HellBounce
                 .Inject(runtimeData)
                 .Inject(inputData)
                 .Init();
-
-            _updateSystems.SetRunSystemState(_updateSystems.GetNamedRunSystem(SystemName.Aim), false);
         }
 
         private void Update() 

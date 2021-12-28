@@ -5,7 +5,7 @@ using UnityEngine;
 public static class SystemName
 {
     public static string Aim = "Aim";
-    public static string Joystick = "Joystick";
+    public static string Input = "Joystick";
     public static string Move = "Move";
     public static string Track = "Look";
     public static string Ricochet = "Ricochet";

@@ -8,8 +8,7 @@ public class SceneData : MonoBehaviour
 
     [Header("OBJECTS")]
     public Camera Camera;
-    public RectTransform MovePanel;
-    public DynamicJoystick Joystick;
+    public DynamicJoystick VirtualJoystic;
     public Transform Arena;
 
     [Header("[POINTS]")]

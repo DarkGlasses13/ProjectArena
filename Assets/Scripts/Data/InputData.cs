@@ -3,7 +3,7 @@ using Leopotam.Ecs;
 
 public class InputData
 {
-    public Vector2 ControllerDirection;
+    public Vector2 MotionInput;
 
     public RaycastHit ClickInfo;
 
