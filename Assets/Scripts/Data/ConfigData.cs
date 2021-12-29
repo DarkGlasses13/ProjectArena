@@ -15,9 +15,11 @@ public class ConfigData : ScriptableObject
     public SpawnMultiplier RobotSpawnMultiplier;
     public float MaxTimeBetweenRobotSpawn = 10;
     [Range(1, 10)] public int GeneratorHelth;
+
     [SerializeField] [Range(0, 100)] private float _startBouncerMoveSpeed;
     [SerializeField] [Range(0, 100)] private float _startBouncerThrowForce;
     [SerializeField] [Range(0, 100)] private float _defaultRobotMoveSpeed;
+
     public float BouncerMoveSpeed { get { return _startBouncerMoveSpeed / _bouncerMoveSpeedPercentModifire; } }
     public float ThrowForce { get { return _startBouncerThrowForce / _throwForcePercentModifire; } }
     public float DefaultMonsterMoveSpeed { get { return _defaultRobotMoveSpeed / _robotMoveSpeedPercentModifire; } }
@@ -36,7 +38,9 @@ public class ConfigData : ScriptableObject
     public int RobotLayer;
     public int GeneratorLayer;
 
-
+    [Header("[RICOCHET TRAJECTORY]")]
+    [Range(3, 50)]public float TrajectoryLength;
+    [Range(1, 10)]public int ReflectionsCount;
 
     private const int _bouncerMoveSpeedPercentModifire = 10;
     private const int _robotMoveSpeedPercentModifire = 20;

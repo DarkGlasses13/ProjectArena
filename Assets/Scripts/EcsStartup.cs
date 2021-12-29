@@ -36,6 +36,7 @@ namespace HellBounce
                 .Add(new RobotInitSystem())
                 .Add(new RobotFactorySystem())
                 .Add(new InputSystem(), SystemName.Input)
+                .Add(new RicochetTrajectoryRenderingSystem(), SystemName.Trajectory)
                 .Add(new ProjectileTrackingSystem(), SystemName.Track)
                 .Add(new CatchingSystem(), SystemName.Catch)
                 .Add(new AimingSystem(), SystemName.Aim)

@@ -9,6 +9,7 @@ public static class SystemName
     public static string Move = "Move";
     public static string Track = "Look";
     public static string Ricochet = "Ricochet";
+    public static string Trajectory = "Trajectory";
     public static string Shot = "Shot";
     public static string Catch = "Catch";
     public static string Throw = "Throw";
