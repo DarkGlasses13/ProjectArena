@@ -2,17 +2,17 @@ using Leopotam.Ecs;
 using System.Collections;
 using UnityEngine;
 
-public class RobotFactorySystem : IEcsInitSystem
+public class EnemyFactorySystem : IEcsInitSystem
 {
     private ConfigData _configData;
     private SceneData _sceneData;
-    private EcsFilter<Robot, Vew, Sleeping> _sleepingRobotFilter;
+    private EcsFilter<Enemy, Vew, Sleeping> _sleepingEnemyFilter;
 
     private float Multiplier
     {
         get
         {
-            switch (_configData.RobotSpawnMultiplier)
+            switch (_configData.EnemySpawnMultiplier)
             {
                 case SpawnMultiplier.X1: return 1;
 
@@ -31,7 +31,7 @@ public class RobotFactorySystem : IEcsInitSystem
 
     private IEnumerator WakeUp()
     {
-        switch (_sleepingRobotFilter.IsEmpty())
+        switch (_sleepingEnemyFilter.IsEmpty())
         {
             case true:
                 Debug.Log("Robots are disabled.");
@@ -41,14 +41,14 @@ public class RobotFactorySystem : IEcsInitSystem
 
                 while (true)
                 {
-                    EcsEntity robot = _sleepingRobotFilter.GetEntity(Random.Range(0, _sleepingRobotFilter.GetEntitiesCount()));
-                    Vew vewComponent = robot.Get<Vew>();
-                    robot.Del<Sleeping>();
+                    EcsEntity entity = _sleepingEnemyFilter.GetEntity(Random.Range(0, _sleepingEnemyFilter.GetEntitiesCount()));
+                    Vew vewComponent = entity.Get<Vew>();
+                    entity.Del<Sleeping>();
                     vewComponent.Object.transform.localPosition = _sceneData.Gates[Random.Range(0, _sceneData.Gates.Length)].localPosition;
                     vewComponent.Object.transform.localRotation = Quaternion.identity;
                     vewComponent.Object.SetActive(true);
-                    robot.Get<Awakened>();
-                    yield return new WaitForSeconds(Random.Range(0, _configData.MaxTimeBetweenRobotSpawn / Multiplier));
+                    entity.Get<Awakened>();
+                    yield return new WaitForSeconds(Random.Range(0, _configData.MaxTimeBetweenEnemySpawn / Multiplier));
                 }
         }
     }

@@ -12,5 +12,5 @@ public enum TransmitterType
     Bouncer,
     Projectile,
     Generator,
-    Monster
+    Enemy
 }

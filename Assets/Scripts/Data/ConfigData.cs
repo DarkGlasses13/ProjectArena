@@ -11,9 +11,9 @@ public class ConfigData : ScriptableObject
     public MovementType MovementType;
 
     [Header("[BALANCE SETTINGS]")]
-    public int RobotPoolSize;
-    public SpawnMultiplier RobotSpawnMultiplier;
-    public float MaxTimeBetweenRobotSpawn = 10;
+    public int EnemyPoolSize;
+    public SpawnMultiplier EnemySpawnMultiplier;
+    public float MaxTimeBetweenEnemySpawn = 10;
     [Range(1, 10)] public int GeneratorHelth;
 
     [SerializeField] [Range(0, 100)] private float _startBouncerMoveSpeed;
@@ -22,20 +22,20 @@ public class ConfigData : ScriptableObject
 
     public float BouncerMoveSpeed { get { return _startBouncerMoveSpeed / _bouncerMoveSpeedPercentModifire; } }
     public float ThrowForce { get { return _startBouncerThrowForce / _throwForcePercentModifire; } }
-    public float DefaultMonsterMoveSpeed { get { return _defaultRobotMoveSpeed / _robotMoveSpeedPercentModifire; } }
+    public float DefaultEnemyMoveSpeed { get { return _defaultRobotMoveSpeed / _robotMoveSpeedPercentModifire; } }
 
     [Header("[PREFABS]")]
     public GameObject PlayerPrefab;
     public GameObject ProjectilePrefab;
     public GameObject GeneratorPrefab;
-    public GameObject DefaultRobotPrefab;
+    public GameObject DefaultEnemyPrefab;
 
     [Header("[PHYSICAL LAYERS]")]
     public int FieldLayer;
     public int WallLayer;
     public int BouncerLayer;
     public int ProjectileLayer;
-    public int RobotLayer;
+    public int EnemyLayer;
     public int GeneratorLayer;
 
     [Header("[RICOCHET TRAJECTORY]")]

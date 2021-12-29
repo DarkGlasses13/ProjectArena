@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Leopotam.Ecs;
 
-public class RobotInitSystem : IEcsInitSystem
+public class EnemyInitSystem : IEcsInitSystem
 {
     private EcsWorld _world;
     private ConfigData _configData;
@@ -12,7 +12,7 @@ public class RobotInitSystem : IEcsInitSystem
     {
         get
         {
-            switch (_configData.RobotSpawnMultiplier)
+            switch (_configData.EnemySpawnMultiplier)
             {
                 case SpawnMultiplier.X1:
                     return 1;
@@ -30,20 +30,20 @@ public class RobotInitSystem : IEcsInitSystem
 
     public void Init()
     {
-        for (int m = 0; m < _configData.RobotPoolSize * _multiplier; m++)
+        for (int m = 0; m < _configData.EnemyPoolSize * _multiplier; m++)
         {
-            GameObject vew = Object.Instantiate(_configData.DefaultRobotPrefab, _sceneData.Arena);
+            GameObject vew = Object.Instantiate(_configData.DefaultEnemyPrefab, _sceneData.Arena);
             EcsEntity entity = _world.NewEntity();
             ref Vew vewComponent = ref entity.Get<Vew>();
-            ref Robot monsterComponent = ref entity.Get<Robot>();
+            ref Enemy EnemyComponent = ref entity.Get<Enemy>();
             vewComponent.Object = vew;
-            vewComponent.Object.layer = _configData.RobotLayer;
+            vewComponent.Object.layer = _configData.EnemyLayer;
             vewComponent.Object.SetActive(false);
-            vewComponent.Object.transform.localPosition = _sceneData.RobotPool.localPosition;
-            monsterComponent.MoveSpeed = _configData.DefaultMonsterMoveSpeed;
-            monsterComponent.NavMeshAgent = vewComponent.Object.GetComponent<NavMeshAgent>();
+            vewComponent.Object.transform.localPosition = _sceneData.EnemyPool.localPosition;
+            EnemyComponent.MoveSpeed = _configData.DefaultEnemyMoveSpeed;
+            EnemyComponent.NavMeshAgent = vewComponent.Object.GetComponent<NavMeshAgent>();
             Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();
-            transmitter.Type = TransmitterType.Monster;
+            transmitter.Type = TransmitterType.Enemy;
             transmitter.Entity = entity;
             entity.Get<Sleeping>();
         }

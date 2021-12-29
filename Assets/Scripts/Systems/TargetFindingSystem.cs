@@ -6,14 +6,14 @@ public class TargetFindingSystem : IEcsRunSystem
 {
     private SceneData _sceneData;
     private EcsFilter<Generator>.Exclude<Busy> _freeGeneratorFilter;
-    private EcsFilter<Robot, Awakened> _awakenedRobotFilter;
+    private EcsFilter<Enemy, Awakened> _awakenedRobotFilter;
 
     public void Run()
     {
         foreach (int index in _awakenedRobotFilter)
         {
             ref EcsEntity robot = ref _awakenedRobotFilter.GetEntity(index);
-            ref Robot robotComponent = ref robot.Get<Robot>();
+            ref Enemy robotComponent = ref robot.Get<Enemy>();
             robotComponent.Target = GetTarget(robot, out float stoppingDistance);
             robotComponent.NavMeshAgent.stoppingDistance = stoppingDistance;
             robot.Del<Awakened>();

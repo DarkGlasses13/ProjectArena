@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Leopotam.Ecs;
 
-public struct Robot
+public struct Enemy
 {
     public NavMeshAgent NavMeshAgent;
     public EcsEntity Target;

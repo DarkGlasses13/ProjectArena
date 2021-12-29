@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotationSmooth: 5
   MovementType: 1
-  RobotPoolSize: 100
-  RobotSpawnMultiplier: 0
-  MaxTimeBetweenRobotSpawn: 5
+  EnemyPoolSize: 0
+  EnemySpawnMultiplier: 0
+  MaxTimeBetweenEnemySpawn: 10
   GeneratorHelth: 5
   _startBouncerMoveSpeed: 70
   _startBouncerThrowForce: 30
@@ -27,13 +27,12 @@ MonoBehaviour:
     type: 3}
   GeneratorPrefab: {fileID: 7928819701120157715, guid: af312896cc844104b9845b035579d9cd,
     type: 3}
-  DefaultRobotPrefab: {fileID: 8760605746569069616, guid: 4597218bec671f64e897b6b209342ce5,
-    type: 3}
+  DefaultEnemyPrefab: {fileID: 0}
   FieldLayer: 6
   WallLayer: 7
   BouncerLayer: 8
   ProjectileLayer: 9
-  RobotLayer: 10
+  EnemyLayer: 0
   GeneratorLayer: 11
   TrajectoryLength: 10
-  ReflectionsCount: 3
+  ReflectionsCount: 1
