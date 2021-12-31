@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotationSmooth: 5
   MovementType: 1
-  EnemyPoolSize: 0
-  EnemySpawnMultiplier: 0
+  EnemyPoolSize: 100
+  EnemySpawnMultiplier: 1
   MaxTimeBetweenEnemySpawn: 10
   GeneratorHelth: 5
   _startBouncerMoveSpeed: 70
@@ -27,7 +27,8 @@ MonoBehaviour:
     type: 3}
   GeneratorPrefab: {fileID: 7928819701120157715, guid: af312896cc844104b9845b035579d9cd,
     type: 3}
-  DefaultEnemyPrefab: {fileID: 0}
+  DefaultEnemyPrefab: {fileID: 8760605746569069616, guid: 4597218bec671f64e897b6b209342ce5,
+    type: 3}
   FieldLayer: 6
   WallLayer: 7
   BouncerLayer: 8
