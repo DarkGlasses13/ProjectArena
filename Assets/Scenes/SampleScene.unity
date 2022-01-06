@@ -392,6 +392,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721669865}
   m_CullTransparentMesh: 1
+--- !u!1 &750341541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 750341542}
+  m_Layer: 0
+  m_Name: Actors
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &750341542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750341541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1013581285}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &773248419
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +618,7 @@ GameObject:
   m_Component:
   - component: {fileID: 827067489}
   m_Layer: 0
-  m_Name: RobotSpawner
+  m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 8fdae4ac756ed6047b01021ff0cc3ebb, type: 3}
   m_NavMeshLayer: 0
@@ -602,7 +632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827067488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8, y: 0, z: 10}
+  m_LocalPosition: {x: -8, y: 0, z: 9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1694250414}
@@ -1056,6 +1086,7 @@ Transform:
   - {fileID: 1066297948}
   - {fileID: 1449316835}
   - {fileID: 1694250414}
+  - {fileID: 750341542}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1206,7 +1237,8 @@ MonoBehaviour:
   Startup: {fileID: 1090691827}
   Camera: {fileID: 963194227}
   VirtualJoystic: {fileID: 1591606695}
-  Arena: {fileID: 0}
+  Arena: {fileID: 1013581285}
+  Actors: {fileID: 750341542}
   PlayerSpawnPoint: {fileID: 44710693}
   Gates:
   - {fileID: 1667037310}
@@ -1564,7 +1596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667037310}
   m_Layer: 0
-  m_Name: RobotSpawner
+  m_Name: EnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 8fdae4ac756ed6047b01021ff0cc3ebb, type: 3}
   m_NavMeshLayer: 0
@@ -1578,7 +1610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667037309}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 0, z: 10}
+  m_LocalPosition: {x: 8, y: 0, z: 9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1694250414}
@@ -1675,7 +1707,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.23333333
+  m_VoxelSize: 0.33333334
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 436b2821c68da454f95bc8dd25f58dbe, type: 2}
 --- !u!1 &1751095472

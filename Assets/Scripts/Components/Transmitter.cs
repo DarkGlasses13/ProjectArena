@@ -9,8 +9,8 @@ public class Transmitter : MonoBehaviour
 
 public enum TransmitterType
 {
-    Bouncer,
+    Player,
     Projectile,
-    Generator,
+    Server,
     Enemy
 }

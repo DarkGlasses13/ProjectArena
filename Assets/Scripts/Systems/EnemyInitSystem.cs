@@ -32,11 +32,12 @@ public class EnemyInitSystem : IEcsInitSystem
     {
         for (int m = 0; m < _configData.EnemyPoolSize * _multiplier; m++)
         {
-            GameObject vew = Object.Instantiate(_configData.DefaultEnemyPrefab, _sceneData.Arena);
+            GameObject vew = Object.Instantiate(_configData.DefaultEnemyPrefab, _sceneData.EnemyPool);
             EcsEntity entity = _world.NewEntity();
             ref Vew vewComponent = ref entity.Get<Vew>();
             ref Enemy EnemyComponent = ref entity.Get<Enemy>();
             vewComponent.Object = vew;
+            vewComponent.Animator = vewComponent.Object.GetComponent<Animator>();
             vewComponent.Object.layer = _configData.EnemyLayer;
             vewComponent.Object.SetActive(false);
             vewComponent.Object.transform.localPosition = _sceneData.EnemyPool.localPosition;
@@ -45,6 +46,7 @@ public class EnemyInitSystem : IEcsInitSystem
             Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();
             transmitter.Type = TransmitterType.Enemy;
             transmitter.Entity = entity;
+            EnemyComponent.NavMeshAgent.stoppingDistance = 2;
             entity.Get<Sleeping>();
         }
     }

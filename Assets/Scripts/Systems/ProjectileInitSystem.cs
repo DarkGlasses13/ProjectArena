@@ -14,7 +14,7 @@ public class ProjectileInitSystem : IEcsInitSystem
             _configData.ProjectilePrefab,
             _sceneData.ProjectileSpawnPoint.localPosition,
             new Quaternion(0, 180, 0, 0),
-            _sceneData.Arena
+            _sceneData.Actors
         );
 
         EcsEntity entity = _world.NewEntity();

@@ -15,7 +15,7 @@ public class PlayerInitSystem : IEcsInitSystem
             _configData.PlayerPrefab,
             _sceneData.PlayerSpawnPoint.localPosition,
             Quaternion.identity,
-            _sceneData.Arena
+            _sceneData.Actors
         );
 
         EcsEntity entity = _world.NewEntity();
@@ -32,7 +32,7 @@ public class PlayerInitSystem : IEcsInitSystem
         bouncerComponent.ThrowForce = _configData.ThrowForce;
         bouncerComponent.LineRenderer = vewComponent.Object.GetComponent<LineRenderer>();
         Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();
-        transmitter.Type = TransmitterType.Bouncer;
+        transmitter.Type = TransmitterType.Player;
         transmitter.Entity = entity;
     }
 }

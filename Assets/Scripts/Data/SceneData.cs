@@ -9,9 +9,10 @@ public class SceneData : MonoBehaviour
     [Header("OBJECTS")]
     public Camera Camera;
     public DynamicJoystick VirtualJoystic;
-    public Transform Arena;
 
     [Header("[POINTS]")]
+    public Transform Arena;
+    public Transform Actors;
     public Transform PlayerSpawnPoint;
     public Transform[] Gates;
     public Transform ProjectileSpawnPoint;

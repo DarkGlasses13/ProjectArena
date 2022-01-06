@@ -36,7 +36,7 @@ public class ConfigData : ScriptableObject
     public int BouncerLayer;
     public int ProjectileLayer;
     public int EnemyLayer;
-    public int GeneratorLayer;
+    public int ServerLayer;
 
     [Header("[RICOCHET TRAJECTORY]")]
     [Range(3, 50)]public float TrajectoryLength;

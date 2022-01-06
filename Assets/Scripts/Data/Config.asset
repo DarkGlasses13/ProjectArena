@@ -17,7 +17,7 @@ MonoBehaviour:
   EnemyPoolSize: 100
   EnemySpawnMultiplier: 1
   MaxTimeBetweenEnemySpawn: 10
-  GeneratorHelth: 5
+  GeneratorHelth: 0
   _startBouncerMoveSpeed: 70
   _startBouncerThrowForce: 30
   _defaultRobotMoveSpeed: 50
@@ -33,7 +33,7 @@ MonoBehaviour:
   WallLayer: 7
   BouncerLayer: 8
   ProjectileLayer: 9
-  EnemyLayer: 0
-  GeneratorLayer: 11
+  EnemyLayer: 10
+  ServerLayer: 11
   TrajectoryLength: 10
   ReflectionsCount: 1

@@ -34,7 +34,9 @@ public class EnemyFactorySystem : IEcsInitSystem
         switch (_sleepingEnemyFilter.IsEmpty())
         {
             case true:
-                Debug.Log("Robots are disabled.");
+                Debug.Log("Enemys are disabled.");
+                Coroutines.StopRoutine(WakeUp());
+
                 break;
 
             case false:
@@ -43,10 +45,11 @@ public class EnemyFactorySystem : IEcsInitSystem
                 {
                     EcsEntity entity = _sleepingEnemyFilter.GetEntity(Random.Range(0, _sleepingEnemyFilter.GetEntitiesCount()));
                     Vew vewComponent = entity.Get<Vew>();
-                    entity.Del<Sleeping>();
-                    vewComponent.Object.transform.localPosition = _sceneData.Gates[Random.Range(0, _sceneData.Gates.Length)].localPosition;
-                    vewComponent.Object.transform.localRotation = Quaternion.identity;
+                    vewComponent.Object.transform.SetParent(_sceneData.Actors);
+                    vewComponent.Object.transform.position = _sceneData.Gates[Random.Range(0, _sceneData.Gates.Length)].position;
+                    vewComponent.Object.transform.rotation = Quaternion.identity;
                     vewComponent.Object.SetActive(true);
+                    entity.Del<Sleeping>();
                     entity.Get<Awakened>();
                     yield return new WaitForSeconds(Random.Range(0, _configData.MaxTimeBetweenEnemySpawn / Multiplier));
                 }

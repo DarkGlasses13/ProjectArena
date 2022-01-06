@@ -14,6 +14,8 @@ public static class SystemName
     public static string Catch = "Catch";
     public static string Throw = "Throw";
     public static string Aggro = "Aggro";
+    public static string Attack = "Attack";
+    public static string Download = "Download";
     public static string Factory = "Factory";
     public static string MonsterDeath = "MonsterDeath";
     public static string PlayerDeath = "PlayarDeath";
