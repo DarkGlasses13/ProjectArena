@@ -39,7 +39,7 @@ public class AimingSystem : IEcsRunSystem
                     (
                         vewComponent.Object.transform.rotation,
                         aimingRotation,
-                        _configData.RotationSmooth * Time.deltaTime
+                        _configData.BouncerRotationSmooth * Time.deltaTime
                     );
             }
 

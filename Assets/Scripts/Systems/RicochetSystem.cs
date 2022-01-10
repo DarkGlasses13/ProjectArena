@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class RicochetSystem : IEcsRunSystem
 {
-    private ConfigData _configData;
     private EcsFilter<Projectile, Vew>.Exclude<Caught> _projectileFilter;
 
     public void Run()
@@ -16,8 +15,6 @@ public class RicochetSystem : IEcsRunSystem
             Vector3 rayOffset = new Vector3(vewComponent.Object.transform.position.x, 0.6f, vewComponent.Object.transform.position.z);
             Ray ray = new Ray(rayOffset, vewComponent.Object.transform.forward);
             float rayLength = 0.5f;
-
-            vewComponent.Object.transform.Translate(Vector3.forward * _configData.ThrowForce * Time.deltaTime);
 
             if (Physics.Raycast(ray, out peojectileComponent.hitInfo, rayLength))
             {

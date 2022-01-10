@@ -18,7 +18,7 @@ public class CatchingSystem : IEcsRunSystem
 
             Vector3 rayOffset = new Vector3(bouncerVewComponent.Object.transform.position.x, 0.6f, bouncerVewComponent.Object.transform.position.z);
             Ray ray = new Ray(rayOffset, bouncerVewComponent.Object.transform.forward);
-            float rayLength = 0.5f;
+            float rayLength = 0.7f;
 
             if
             (

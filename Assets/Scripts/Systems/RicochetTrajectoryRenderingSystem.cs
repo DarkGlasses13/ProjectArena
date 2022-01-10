@@ -1,10 +1,35 @@
 using UnityEngine;
 using Leopotam.Ecs;
+using System.Collections.Generic;
 
-class RicochetTrajectoryRenderingSystem : IEcsRunSystem
+class RicochetTrajectoryRenderingSystem : IEcsInitSystem, IEcsRunSystem
 {
     private ConfigData _configData;
+    private EcsFilter<Bouncer, Vew> _bouncerFilter;
     private EcsFilter<Bouncer, Vew, Aimer> _aimingBouncerFilter;
+    private List<LineRenderer> _trajectoryLines = new List<LineRenderer>();
+
+    public void Init()
+    {
+        foreach (int index in _bouncerFilter)
+        {
+            ref Bouncer bouncerComponent = ref _bouncerFilter.Get1(index);
+            ref Vew bouncerVewComponent = ref _bouncerFilter.Get2(index);
+            int lastReflectionIndex = _configData.StartReflectionsCount - 1;
+
+            for (int i = 0; i < _configData.StartReflectionsCount; i++)
+            {
+                if (i != lastReflectionIndex)
+                {
+                    InitLines(_configData.TrajectoryLine, bouncerVewComponent.Object.transform);
+                }
+                else
+                {
+                    InitLines(_configData.EndTrajectoryLine, bouncerVewComponent.Object.transform);
+                }
+            }
+        }
+    }
 
     public void Run()
     {
@@ -16,39 +41,59 @@ class RicochetTrajectoryRenderingSystem : IEcsRunSystem
             Vector3 offset = new Vector3
             (
                 vewComponent.Object.transform.position.x,
-                0.6f,
+                1f,
                 vewComponent.Object.transform.position.z
             );
 
             Ray ray = new Ray(offset, vewComponent.Object.transform.forward);
-            bouncerComponent.LineRenderer.positionCount = 1;
-            bouncerComponent.LineRenderer.SetPosition(0, offset);
-            float remainingLength = _configData.TrajectoryLength;
 
-            if (Input.GetMouseButton(0)) { bouncerComponent.LineRenderer.enabled = true; }
-
-            if (Input.GetMouseButton(0) == false) { bouncerComponent.LineRenderer.enabled = false; }
-
-            for (int i = 0; i < _configData.ReflectionsCount; i++)
+            for (int i = 0; i < _configData.StartReflectionsCount; i++)
             {
-                if (Physics.Raycast(ray, out RaycastHit hitInfo, remainingLength))
+                switch (Physics.Raycast(ray, out RaycastHit hitInfo, _configData.StartTrajectoryLength))
                 {
-                    bouncerComponent.LineRenderer.positionCount += 1;
-                    bouncerComponent.LineRenderer.SetPosition(bouncerComponent.LineRenderer.positionCount - 1, hitInfo.point);
-                    remainingLength -= Vector3.Distance(ray.origin, hitInfo.point);
-                    ray = new Ray(hitInfo.point, Vector3.Reflect(ray.direction, hitInfo.normal));
-                }
-                else
-                {
-                    bouncerComponent.LineRenderer.positionCount += 1;
+                    case true:
+                        DrawLine(_trajectoryLines[i], ray.origin, hitInfo.point);
+                        ray = new Ray(hitInfo.point, Vector3.Reflect(ray.direction, hitInfo.normal));
+                        break;
 
-                    bouncerComponent.LineRenderer.SetPosition
-                    (
-                        bouncerComponent.LineRenderer.positionCount - 1,
-                        ray.origin + ray.direction * remainingLength
-                    );
+                    case false:
+                        EraseLine(_trajectoryLines[i]);
+                        break;
                 }
             }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                EraseAllLines();
+            }
+        }
+    }
+
+    private void InitLines(GameObject line, Transform bouncer)
+    {
+        GameObject instantiatedLine = Object.Instantiate(line, bouncer);
+        instantiatedLine.SetActive(false);
+        LineRenderer lineRenderer = instantiatedLine.GetComponent<LineRenderer>();
+        _trajectoryLines.Add(lineRenderer);
+    }
+
+    private void DrawLine(LineRenderer lineRenderer, Vector3 startPosition, Vector3 endPosition)
+    {
+        lineRenderer.gameObject.SetActive(true);
+        lineRenderer.SetPosition(0, startPosition);
+        lineRenderer.SetPosition(1, endPosition);
+    }
+
+    private void EraseLine(LineRenderer lineRenderer)
+    {
+        lineRenderer.gameObject.SetActive(false);
+    }
+
+    private void EraseAllLines()
+    {
+        foreach (LineRenderer lineRenderer in _trajectoryLines)
+        {
+            lineRenderer.gameObject.SetActive(false);
         }
     }
 }

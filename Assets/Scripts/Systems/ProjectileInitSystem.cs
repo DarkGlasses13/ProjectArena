@@ -25,5 +25,6 @@ public class ProjectileInitSystem : IEcsInitSystem
         Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();
         transmitter.Type = TransmitterType.Projectile;
         transmitter.Entity = entity;
+        projectileComponent.Speed = _configData.StartProjectileSpeed;
     }
 }

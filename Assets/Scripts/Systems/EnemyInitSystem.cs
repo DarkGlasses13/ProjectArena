@@ -7,6 +7,8 @@ public class EnemyInitSystem : IEcsInitSystem
     private EcsWorld _world;
     private ConfigData _configData;
     private SceneData _sceneData;
+    private const float _angularSpeed = 500;
+    private const float _acceleration = 100;
 
     private int _multiplier
     {
@@ -46,7 +48,9 @@ public class EnemyInitSystem : IEcsInitSystem
             Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();
             transmitter.Type = TransmitterType.Enemy;
             transmitter.Entity = entity;
-            EnemyComponent.NavMeshAgent.stoppingDistance = 2;
+            EnemyComponent.NavMeshAgent.speed = EnemyComponent.MoveSpeed;
+            EnemyComponent.NavMeshAgent.angularSpeed = _angularSpeed;
+            EnemyComponent.NavMeshAgent.acceleration = _acceleration;
             entity.Get<Sleeping>();
         }
     }

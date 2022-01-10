@@ -28,8 +28,7 @@ public class PlayerInitSystem : IEcsInitSystem
         _sceneData.PlayerEntity = entity;
         moverComponent.Controler = vewComponent.Object.GetComponent<CharacterController>();
         moverComponent.MoveSpeed = _configData.BouncerMoveSpeed;
-        moverComponent.rotationSmooth = _configData.RotationSmooth;
-        bouncerComponent.ThrowForce = _configData.ThrowForce;
+        moverComponent.rotationSmooth = _configData.BouncerRotationSmooth;
         bouncerComponent.LineRenderer = vewComponent.Object.GetComponent<LineRenderer>();
         Transmitter transmitter = vewComponent.Object.AddComponent<Transmitter>();
         transmitter.Type = TransmitterType.Player;

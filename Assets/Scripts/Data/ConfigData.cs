@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ConfigData : ScriptableObject
 {
-
-    [HideInInspector] public float RotationSmooth = 3;
+    [HideInInspector] public float BouncerRotationSmooth = 3;
 
     [Header("CONTROL")]
     public MovementType MovementType;
@@ -14,20 +13,20 @@ public class ConfigData : ScriptableObject
     public int EnemyPoolSize;
     public SpawnMultiplier EnemySpawnMultiplier;
     public float MaxTimeBetweenEnemySpawn = 10;
-    [Range(1, 10)] public int GeneratorHelth;
+    [Range(1, 10)] public int ServerHelth;
 
     [SerializeField] [Range(0, 100)] private float _startBouncerMoveSpeed;
-    [SerializeField] [Range(0, 100)] private float _startBouncerThrowForce;
+    [SerializeField] [Range(0, 100)] private float _startProjectileSpeed;
     [SerializeField] [Range(0, 100)] private float _defaultRobotMoveSpeed;
 
     public float BouncerMoveSpeed { get { return _startBouncerMoveSpeed / _bouncerMoveSpeedPercentModifire; } }
-    public float ThrowForce { get { return _startBouncerThrowForce / _throwForcePercentModifire; } }
+    public float StartProjectileSpeed { get { return _startProjectileSpeed / _throwForcePercentModifire; } }
     public float DefaultEnemyMoveSpeed { get { return _defaultRobotMoveSpeed / _robotMoveSpeedPercentModifire; } }
 
     [Header("[PREFABS]")]
     public GameObject PlayerPrefab;
     public GameObject ProjectilePrefab;
-    public GameObject GeneratorPrefab;
+    public GameObject ServerPrefab;
     public GameObject DefaultEnemyPrefab;
 
     [Header("[PHYSICAL LAYERS]")]
@@ -39,8 +38,10 @@ public class ConfigData : ScriptableObject
     public int ServerLayer;
 
     [Header("[RICOCHET TRAJECTORY]")]
-    [Range(3, 50)]public float TrajectoryLength;
-    [Range(1, 10)]public int ReflectionsCount;
+    public GameObject TrajectoryLine;
+    public GameObject EndTrajectoryLine;
+    [Range(3, 50)]public float StartTrajectoryLength;
+    [Range(1, 10)]public int StartReflectionsCount;
 
     private const int _bouncerMoveSpeedPercentModifire = 10;
     private const int _robotMoveSpeedPercentModifire = 20;

@@ -5,12 +5,14 @@ using UnityEngine;
 public static class SystemName
 {
     public static string Aim = "Aim";
-    public static string Input = "Joystick";
+    public static string Input = "Input";
+    public static string Time = "Time";
     public static string Move = "Move";
     public static string Track = "Look";
+    public static string Acceleration = "Acceleration";
     public static string Ricochet = "Ricochet";
     public static string Trajectory = "Trajectory";
-    public static string Shot = "Shot";
+    public static string Hit = "Shot";
     public static string Catch = "Catch";
     public static string Throw = "Throw";
     public static string Aggro = "Aggro";

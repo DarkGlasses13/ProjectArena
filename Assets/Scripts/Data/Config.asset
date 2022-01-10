@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2054603795583834a80feb7bc70d38f2, type: 3}
   m_Name: Config
   m_EditorClassIdentifier: 
-  RotationSmooth: 5
+  BouncerRotationSmooth: 3
   MovementType: 1
   EnemyPoolSize: 100
   EnemySpawnMultiplier: 1
   MaxTimeBetweenEnemySpawn: 10
-  GeneratorHelth: 0
+  ServerHelth: 5
   _startBouncerMoveSpeed: 70
-  _startBouncerThrowForce: 30
+  _startProjectileSpeed: 30
   _defaultRobotMoveSpeed: 50
   PlayerPrefab: {fileID: 8512232042280173598, guid: a793f9d4c5667894dbfc6497d2090821,
     type: 3}
   ProjectilePrefab: {fileID: 3117677487488550278, guid: 720c4b61093af094380354084eb2eeb8,
     type: 3}
-  GeneratorPrefab: {fileID: 7928819701120157715, guid: af312896cc844104b9845b035579d9cd,
+  ServerPrefab: {fileID: 7928819701120157715, guid: af312896cc844104b9845b035579d9cd,
     type: 3}
   DefaultEnemyPrefab: {fileID: 8760605746569069616, guid: 4597218bec671f64e897b6b209342ce5,
     type: 3}
@@ -35,5 +35,9 @@ MonoBehaviour:
   ProjectileLayer: 9
   EnemyLayer: 10
   ServerLayer: 11
-  TrajectoryLength: 10
-  ReflectionsCount: 1
+  TrajectoryLine: {fileID: 9183654870276301551, guid: 5e34d7667cd8f444f95af970b750a726,
+    type: 3}
+  EndTrajectoryLine: {fileID: 7867838526619936044, guid: f1909c293e30dba4f8e0fb87019775d8,
+    type: 3}
+  StartTrajectoryLength: 50
+  StartReflectionsCount: 5

@@ -36,12 +36,14 @@ namespace HellBounce
                 .Add(new EnemyInitSystem())
                 .Add(new EnemyFactorySystem())
                 .Add(new InputSystem(), SystemName.Input)
+                .Add(new TimeControlSystem(), SystemName.Time)
+                .Add(new ProjectileAccelerationSystem(), SystemName.Acceleration)
                 .Add(new RicochetTrajectoryRenderingSystem(), SystemName.Trajectory)
                 .Add(new ProjectileTrackingSystem(), SystemName.Track)
                 .Add(new CatchingSystem(), SystemName.Catch)
                 .Add(new AimingSystem(), SystemName.Aim)
                 .Add(new ThrowingSystem(), SystemName.Throw)
-                .Add(new HitSystem(), SystemName.Shot)
+                .Add(new HitSystem(), SystemName.Hit)
                 .Add(new AggroSystem(), SystemName.Aggro)
                 .Add(new DownloadingSystem(), SystemName.Download)
                 .Add(new EnemyAttackSystem(), SystemName.Attack)
@@ -58,8 +60,8 @@ namespace HellBounce
                 .Init();
 
             _fixedUpdateSystems
-                .Add(new RicochetSystem(), SystemName.Ricochet)
                 .Add(new MoveControlSystem(), SystemName.Move)
+                .Add(new RicochetSystem(), SystemName.Ricochet)
                 .Inject(_updateSystems)
                 .Inject(_configData)
                 .Inject(_sceneData)

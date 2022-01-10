@@ -8,13 +8,13 @@ public class ServerInitSystem : IEcsInitSystem
     private SceneData _sceneData;
     private int _serversCount = 5;
     private float _distance = 2f;
-    private Vector3 _startSpawnPosition = new Vector3(-4f, 0, -9f);
+    private Vector3 _startSpawnPosition = new Vector3(-4f, 0, -9.5f);
 
     public void Init()
     {
         for (int i = 0; i < _serversCount; i++)
         {
-            GameObject vew = GameObject.Instantiate(_configData.GeneratorPrefab, _sceneData.Actors);
+            GameObject vew = GameObject.Instantiate(_configData.ServerPrefab, _sceneData.Actors);
             EcsEntity server = _world.NewEntity();
             ref Vew vewComponent = ref server.Get<Vew>();
             ref Server serverComponent = ref server.Get<Server>();
@@ -26,7 +26,7 @@ public class ServerInitSystem : IEcsInitSystem
             transmitter.Type = TransmitterType.Server;
             transmitter.Entity = server;
             _startSpawnPosition.x += _distance;
-            serverComponent.DataCount = _configData.GeneratorHelth;
+            serverComponent.DataCount = _configData.ServerHelth;
         }
     }
 }
